@@ -1,9 +1,9 @@
 // Class //
-class Block extends Entity{
+class Explosion extends Entity{
     constructor(id, xPos, yPos) {
         super(id, xPos, yPos);
     }
 }
 
 // Export //
-module.exports = Block;
+module.exports = Explosion;

@@ -3,13 +3,11 @@ var STARTING_BOMBS = 3;
 var MAX_SPEED = 10;
 
 // Class //
-class Player {
+class Player extends Entity{
     constructor(id, xPos, yPos) {
-        this._x = xPos;
-        this._y = yPos;
+        super(id, xPos, yPos);
         this._bombCount = STARTING_BOMBS;
         this._isDead = false;
-        this._id = id;
         this._pressingRight = false;
         this._pressingLeft = false;
         this._pressingUp = false;
@@ -18,20 +16,11 @@ class Player {
     }
 
     // Getters //
-    get x() {
-        return this._x;
-    }
-    get y() {
-        return this._y;
-    }
     get bombCount() {
         return this._bombCount;
     }
     get isDead() {
         return this._isDead;
-    }
-    get id() {
-        return this._id;
     }
     get pressingRight() {
         return this._pressingRight;
@@ -50,12 +39,6 @@ class Player {
     }
 
     // Setters //
-    set x(newPos) {
-        this._x = newPos;
-    }
-    set y(newPos) {
-        this._y = newPos;
-    }
     set bombCount(newCount) {
         this._bombCount = newCount;
     }
