@@ -2,6 +2,9 @@
 var STARTING_BOMBS = 3;
 var MAX_SPEED = 10;
 
+// Imports //
+var Entity = require('./Entity');
+
 // Class //
 class Player extends Entity{
     constructor(id, xPos, yPos) {

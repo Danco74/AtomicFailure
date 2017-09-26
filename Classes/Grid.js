@@ -9,24 +9,16 @@ class Grid {
     }
 
     // Other Methods //
-    removeFromSquare(row, col, objName) { // objName = 'player' | 'bomb' | 'explosion' | 'block'
+    getTileObject(row, col) {
+        return this._matrix[row][col];
+    }
+
+    removeFromTile(row, col, objName) { // objName = 'player' | 'bomb' | 'explosion' | 'block'
         delete this._matrix[row][col][objName]; 
     }
 
-    placePlayer(row, col, id) {
-        this._matrix[row][col].player = id;
-    }
-
-    placeBomb(row, col, id) {
-        this._matrix[row][col].bomb = id;
-    }
-    
-    placeExplosion(row, col, id) {
-        this._matrix[row][col].explosion = id;
-    }
-
-    placeBlock(row, col, id) {
-        this._matrix[row][col].block = id;
+    addToTile(row, col, objName, id) { // objName = 'player' | 'bomb' | 'explosion' | 'block'
+        this._matrix[row][col][objName] = id; 
     }
 }
 

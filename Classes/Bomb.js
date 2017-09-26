@@ -2,6 +2,9 @@
 var EXPLOSION_RADIUS = 2;
 var TIMER = 2;
 
+// Imports //
+var Entity = require('./Entity');
+
 // Class //
 class Bomb extends Entity{
     constructor(id, xPos, yPos) {
