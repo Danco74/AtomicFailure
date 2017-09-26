@@ -5,7 +5,7 @@ var COL_NUMBER = 20;
 // Class //
 class Grid {
     constructor() {
-        this._matrix = _matrixArray(ROW_NUMBER, COL_NUMBER); // {contains: {obj} }
+        this._matrix = _matrixArray(ROW_NUMBER, COL_NUMBER); // Abstract/Dynamic objects
     }
 
     // Other Methods //
