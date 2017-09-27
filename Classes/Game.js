@@ -38,14 +38,14 @@ class Game {
 
     deletePlayer(id) {
         var index = _findIndexById(this._players, id);
-        if(index < 0 || index >= this._players.length)
+        if (index < 0 || index >= this._players.length)
             return false;
         this._players.splice(index, 1);
     }
 
     updateKeys(id, direction, state) {
         var index = _findIndexById(this._players, id);
-        if(index < 0 || index >= this._players.length)
+        if (index < 0 || index >= this._players.length)
             return false;
         var player = this._players[index];
         player.updateKeyPresses(direction, state);
@@ -66,7 +66,7 @@ class Game {
 
     killPlayer(id) {
         var index = _findIndexById(this._players, id);
-        if(index < 0 || index >= this._players.length)
+        if (index < 0 || index >= this._players.length)
             return false;
         this._players.splice(index, 1);
     }
@@ -156,9 +156,11 @@ class Game {
     }
 
     removeExplosion(refId, row, col) {
+        var playerId = null;
         for (var i = 0; i < this._explosions.length; i++) {
             var explosion = this._explosions[i];
             if (explosion.refId == refId) {
+                playerId = this._explosions[i].id;
                 this._explosions.splice(i, 1);
                 this._grid.removeFromTile(row, col, 'explosion');
             }
@@ -175,9 +177,14 @@ class Game {
                 var bombCol = bomb.col;
                 var explosionRadius = bomb.radius;
                 this._grid.removeFromTile(bombRow, bombCol, 'bomb');
+                var playerIndex = _findIndexById(this._players, bomb.id);
                 this._bombs.splice(i, 1);
                 this.createExplosion(bomb.id, bombRow, bombCol, explosionRadius);
 
+                if (playerIndex >= 0 && playerIndex < this._players.length) {
+                    this.players[playerIndex].bombCount++;
+                    console.log(this.players[playerIndex].bombCount);
+                }
             }
         }
     }
