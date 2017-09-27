@@ -46,12 +46,13 @@ class Game {
         var player = this._players[index];
         var originalGridPos = {row: player.row, col: player.col}
         player.movePosition();
+        var inSameTile = ( (player.row === originalGridPos.row) && (player.col === originalGridPos.col) )
         var tileObject = this._grid.getTileObject(player.row, player.col); // will return false if out of bounds
         if(!tileObject) {
             player.revertMovement();
             return false;
         }
-        if (tileObject.hasOwnProperty('block') || tileObject.hasOwnProperty('bomb')) { // Checks if new tile has a bomb or block
+        if ( !inSameTile && (tileObject.hasOwnProperty('block') || tileObject.hasOwnProperty('bomb')) ) { // Checks if new tile has a bomb or block
             player.revertMovement();
             return false;
         }
