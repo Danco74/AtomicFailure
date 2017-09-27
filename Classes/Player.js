@@ -7,8 +7,8 @@ var Entity = require('./Entity');
 
 // Class //
 class Player extends Entity{
-    constructor(id, xPos, yPos) {
-        super(id, xPos, yPos);
+    constructor(id, row, col) {
+        super(id, row, col);
         this._bombCount = STARTING_BOMBS;
         this._isDead = false;
         this._pressingRight = false;
@@ -62,18 +62,41 @@ class Player extends Entity{
     }
 
     // Other Methods //
-    updatePosition() {
-        if(pressingRight) {
-            this._x += 1;
+    movePosition(direction, keyState) {
+        switch (direction) {
+            case "left":
+                this._x-=MAX_SPEED;
+                break;
+            case "right":
+                this._x+=MAX_SPEED;
+                break;
+            case "up":
+                this._y-=MAX_SPEED;
+                break;
+            case "down":
+                this._y+=MAX_SPEED;
+                break;
+            default:
+                break;
         }
-        if(pressingLeft) {
-            this._x -= 1;
-        }
-        if(pressingUp) {
-            this._y -= 1;
-        }
-        if(pressingDown) {
-            this._y += 1;
+    }
+
+    revertMovement(direction) {
+        switch (direction) {
+            case "left":
+                this._x+=MAX_SPEED;
+                break;
+            case "right":
+                this._x-=MAX_SPEED;
+                break;
+            case "up":
+                this._y+=MAX_SPEED;
+                break;
+            case "down":
+                this._y-=MAX_SPEED;
+                break;
+            default:
+                break;
         }
     }
 }

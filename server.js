@@ -45,7 +45,7 @@ io.sockets.on('connection', function (socket) {
     //When a key press message is being sent from the client, do the folloing:
     socket.on('keyPress', function (data) {
         console.log(data);
-            game.movePlayer(socket.id,data.inputId);
+            game.movePlayer(socket.id, data.inputId, data.state);
     });
 
 });

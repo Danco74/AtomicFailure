@@ -79,10 +79,10 @@ var GameState = {
             //     game.add.sprite(bomb.x,bomb.y,'bomb');
             //     game.add.sprite(player.x,player.y,'player')
             // }
-
+            
             for (var i = 0; i < data.players.length; i++) {
                 var player = data.players[i];
-                game.add.sprite(player.x, player.y, 'player')
+                game.add.sprite(player._x, player._y, 'player')
             }
 
         });

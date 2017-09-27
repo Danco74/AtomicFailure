@@ -32,25 +32,30 @@ class Game {
         this._players.splice(index, 1);
     }
 
-    movePlayer(id, direction) {
+    movePlayer(id, direction, keyState) {
         var index = _findIndexById(this._players, id);
-        var newCoordinates = { x: this._players[index].x, y: this._players[index].y };
-        _movePosition(direction, newCoordinates); // Updates newCoordinates
-        var tileObject = this._grid.getTileObject(newCoordinates.x, newCoordinates.y);
+        var player = this._players[index];
+        var originalGridPos = {row: player.row, col: player.col}
+        player.movePosition(direction, keyState);
+        var tileObject = this._grid.getTileObject(player.row, player.col);
 
-        if (tileObject.block || tileObject.bomb) { // Checks if new tile has a bomb or block
+        if (tileObject.hasOwnProperty('block') || tileObject.hasOwnProperty('bomb')) { // Checks if new tile has a bomb or block
+            player.revertMovement(direction);
             return false;
         }
         // else
-        this._grid.removeFromTile(this._players[index].x, this._players[index].y, 'player')
-        this._grid.addToTile(newCoordinates.x, newCoordinates.y, 'player', id);
-        this._players[index].x = newCoordinates.x;
-        this._players[index].y = newCoordinates.y;
+        this._grid.removeFromTile(originalGridPos.row, originalGridPos.col, 'player')
+        this._grid.addToTile(player.row, player.col, 'player', id);
         return true;
     }
 
     placeBomb(playerId) {
-
+        //find player index in players array
+        //check if that player has bombs, otherwise return
+        //decrement players bombs
+        //make bomb object giving player row! and col! and id
+        //push bomb obj to array
+        //add bomb to grid at row and col
     }
 
     explodeBomb(bombId) {
@@ -68,23 +73,4 @@ function _findIndexById(array, id) {
         return currentObj.id === id;
     });
     return index;
-}
-
-function _movePosition(direction, coordinates) {
-    switch (direction) {
-        case "left":
-            coordinates.x--;
-            break;
-        case "right":
-            coordinates.x++;
-            break;
-        case "up":
-            coordinates.y++;
-            break;
-        case "down":
-            coordinates.y--;
-            break;
-        default:
-            break;
-    }
 }
