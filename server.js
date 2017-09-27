@@ -4,10 +4,10 @@ var app = express();
 var serv = require('http').Server(app);
 
 //Game module
-/*
-var Game = require('Classes/Game');
+
+var Game = require('./Classes/Game');
 var game = new Game();
-*/
+
 
 
 app.use('/', express.static(__dirname + '/client'));
@@ -31,32 +31,21 @@ io.sockets.on('connection', function (socket) {
     SOCKET_LIST[socket.id] = socket;
 
     //create new player
-    /* var player = Game.createPlayer(socket.id); //a player object should be returned here */
+    game.createPlayer(socket.id); 
 
     //when this session disconnect do the following:
-    /*
+    
     socket.on('disconnect',function(){
         //delete socket
         delete SOCKET_LIST[socket.id];
         //delete player
-        Game.remove(player);
+        Game.deletePlayer(socket.id);
     });
-    */
+    
 
     //When a key press message is being sent from the client, do the folloing:
     socket.on('keyPress', function (data) {
-        //if the left key was pressed, move player left
-        if (data.inputId === 'left')
-            player.moveLeft();
-        //if the right key was pressed move right
-        else if (data.inputId === 'right')
-            player.moveRight();
-        //if the up key was pressed move up
-        else if (data.inputId === 'up')
-            player.moveUp();
-        //if the down key was pressed move down
-        else if (data.inputId === 'down')
-            player.moveDown();
+            game.movePlayer(socket.id,data.inputId);
     });
 
 });
@@ -64,9 +53,8 @@ io.sockets.on('connection', function (socket) {
 
 setInterval(function () {
 
-    /*
         var pack = {};
-
+/*
         //Update players positions
         for(var player in game.players){
             var player = game.players[player];
@@ -90,11 +78,14 @@ setInterval(function () {
                 y: bomb.y
             };
         }
-
-    */
-
+*/
     var pack = {};
 
+    pack["players"] = game.players;
+    pack["bombs"] = [];
+
+
+    /*
     pack["players"] = [{
             x: 500,
             y: 500
@@ -112,6 +103,7 @@ setInterval(function () {
         x: 700,
         y: 700
     }];
+    */
 
     //Update all clients states
     for (var i in SOCKET_LIST) {
