@@ -50,7 +50,7 @@ io.sockets.on('connection', function (socket) {
 
 });
 
-
+var currentFrame = 0;
 setInterval(function () {
 
         var pack = {};
@@ -80,6 +80,10 @@ setInterval(function () {
         }
 */
     var pack = {};
+    currentFrame++;
+    if (currentFrame > 1000)
+        currentFrame=0;
+
     for(var player in game.players){
         var player = game.players[player];
 
@@ -89,6 +93,7 @@ setInterval(function () {
     }
     pack["players"] = game.players;
     pack["bombs"] = game.bombs;
+    pack["currentFrame"] = currentFrame;
 
 
     /*

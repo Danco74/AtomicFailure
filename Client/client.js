@@ -12,7 +12,8 @@ var GameState = {
         this.load.image('background', 'assets/backround.jpg');
         this.load.image('bomb', 'assets/bomb.png');
         this.load.image('blast', 'assets/blast.png');
-        this.load.image('player', 'assets/RedFront.png');
+        this.load.image('player1', 'assets/RedFront.png');
+        this.load.spritesheet('player','assets/down.png',45,72,4);
 
 
         Client.socket.on('newPositions', function (data) {
@@ -90,8 +91,22 @@ var GameState = {
 
             for (var i = 0; i < data.players.length; i++) {
                 var player = data.players[i];
-                game.add.sprite(player._x, player._y, 'player')
+                var a = game.add.sprite(player._x, player._y, 'player');
+                a.animations.add('walk',[data.currentFrame%a.animations._frameData._frames.length]);
+                a.animations.play('walk',1, false);
+
             }
+
+            // for (var i = 0; i < data.players.length; i++) {
+            //     var player = data.players[i];
+            //     // console.log(player);
+            //     var a = game.add.sprite(player._x, player._y, 'player');
+            //     a.animations.add('walk',[data.currentFrame%a.animations._frameData._frames.length]);
+               
+            //     // a.animations.add('walk');
+            //     a.animations.play('walk',1, false);
+            //     // game.add.tween(a).to({ x: 800 }, 20000, Phaser.Easing.Linear.None, true)
+            // }
 
         });
 
