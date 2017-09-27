@@ -111,7 +111,6 @@ var GameState = {
                 var explosion = data.explosions[i];
                 game.add.sprite(explosion._x, explosion._y, 'explosion');
             }
-            console.log(data);
             if(data.isDead){
                 game.add.text(game.world.centerX, game.world.centerY, 'you are dead');
             }

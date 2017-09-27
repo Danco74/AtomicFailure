@@ -42,7 +42,7 @@ io.sockets.on('connection', function (socket) {
         //delete player
         game.deletePlayer(socket.id);
         //delete dead player message
-        DEAD_PLAYERS.splice(DEAD_PLAYERS.indexOf(socket.id), 1);
+        DEAD_PLAYERS.splice(DEAD_PLAYERS.indexOf(parseFloat(socket.id)), 1);
     });
     
     //When a key press message is being sent from the client, do the folloing:

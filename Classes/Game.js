@@ -62,6 +62,8 @@ class Game {
 
     killPlayer(id) {
         var index = _findIndexById(this._players, id);
+        if(index < 0 || index >= this._players.length)
+            return false;
         this._players.splice(index, 1);
     }
 
