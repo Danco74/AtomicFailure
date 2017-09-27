@@ -65,8 +65,8 @@ class Game {
         //find player index in players array
         var index = _findIndexById(this._players, playerId);
         var player = this._players[index];
-        //check if player pressed space
-        if(!player.pressingSpace)
+        //check if player pressed enter
+        if(!player.pressingBomb)
             return false;
         //check if that player has bombs, otherwise return
         if(player.bombCount === 0)

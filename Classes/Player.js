@@ -15,7 +15,7 @@ class Player extends Entity {
         this._pressingLeft = false;
         this._pressingUp = false;
         this._pressingDown = false;
-        this._pressingSpace = false;
+        this._pressingBomb = false;
         this._maxSpd = MAX_SPEED;
     }
 
@@ -38,8 +38,8 @@ class Player extends Entity {
     get pressingDown() {
         return this._pressingDown;
     }
-    get pressingSpace() {
-        return this._pressingSpace;
+    get pressingBomb() {
+        return this._pressingBomb;
     }
     get maxSpd() {
         return this._maxSpd;
@@ -68,8 +68,8 @@ class Player extends Entity {
             case "down":
                 this._pressingDown = keyState;
                 break;
-            case "space":
-                this._pressingSpace = keyState;
+            case "bomb":
+                this._pressingBomb = keyState;
                 break;
             default:
                 break;

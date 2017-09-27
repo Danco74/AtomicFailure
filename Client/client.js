@@ -40,9 +40,9 @@ var GameState = {
                     inputId: 'up',
                     state: true
                 });
-            else if (event.keyCode === 32) // space
+            else if (event.keyCode === 66) // b
                 Client.socket.emit('keyPress', {
-                    inputId: 'space',
+                    inputId: 'bomb',
                     state: true
                 });
 
@@ -68,9 +68,9 @@ var GameState = {
                     inputId: 'up',
                     state: false
                 });
-            else if (event.keyCode === 32) // space
+            else if (event.keyCode === 66) // b
                 Client.socket.emit('keyPress', {
-                    inputId: 'space',
+                    inputId: 'bomb',
                     state: false
                 });
         }
