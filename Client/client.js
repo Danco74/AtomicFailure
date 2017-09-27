@@ -86,9 +86,10 @@ var GameState = {
                 var player = data.players[i];
                 // console.log(player);
                 var a = game.add.sprite(player.x, player.y, 'demo');
-                a.animations.add('walk',[data.currentFrame]);
+                a.animations.add('walk',[data.currentFrame%a.animations._frameData._frames.length]);
+               
                 // a.animations.add('walk');
-                // a.animations.play('walk', 30, true);
+                a.animations.play('walk',1, false);
                 // game.add.tween(a).to({ x: 800 }, 20000, Phaser.Easing.Linear.None, true);
             }
 

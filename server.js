@@ -81,7 +81,7 @@ setInterval(function () {
 */
     var pack = {};
     currentFrame++;
-    if (currentFrame > 7)
+    if (currentFrame > 1000)
         currentFrame=0;
     
     pack["players"] = game.players;
@@ -116,4 +116,4 @@ setInterval(function () {
         socket.emit('newPositions', pack);
     }
 
-}, 40);
+}, 80);
