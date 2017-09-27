@@ -11,7 +11,7 @@ var GameState = {
     preload: function () {
         this.load.image('background', 'assets/backround.jpg');
         this.load.image('bomb', 'assets/bomb.png');
-        this.load.image('blast', 'assets/blast.png');
+        this.load.image('explosion', 'assets/explosion.png');
         this.load.image('player', 'assets/RedFront.png');
 
 
@@ -84,13 +84,19 @@ var GameState = {
             game.world.removeAll();
             game.background = game.add.sprite(0, 0, 'background');
             for (var i = 0; i < data.bombs.length; i++) {
-                var bomb = data.bombs[i];
-                game.add.sprite(bomb._x, bomb._y, 'bomb');
-            }
+                var bombPos = data.bombs[i];
+                var bomb = game.add.sprite(bombPos._x, bombPos._y, 'bomb');
 
+                bomb.scale.setTo(0.5,0.5);
+            }
             for (var i = 0; i < data.players.length; i++) {
                 var player = data.players[i];
                 game.add.sprite(player._x, player._y, 'player')
+            }
+
+            for (var i = 0; i < data.explosions.length; i++) {
+                var explosion = data.explosions[i];
+                game.add.sprite(explosion._x, explosion._y, 'explosion');
             }
 
         });
