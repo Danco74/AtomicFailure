@@ -1,5 +1,6 @@
 var game = new Phaser.Game(800, 800, Phaser.AUTO,'game');
 
+//Create client object to handle server communications
 var Client = {};
 Client.socket = io.connect();
 
