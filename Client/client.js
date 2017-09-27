@@ -12,8 +12,7 @@ var GameState = {
         this.load.image('background', 'assets/backround.jpg');
         this.load.image('bomb', 'assets/bomb.png');
         this.load.image('blast', 'assets/blast.png');
-
-
+        this.load.image('player', 'assets/RedFront.png');
 
 
         Client.socket.on('newPositions', function (data) {
@@ -22,22 +21,22 @@ var GameState = {
 
         document.onkeydown = function (event) {
             if (event.keyCode === 68) //d
-                socket.emit('keyPress', {
+                Client.socket.emit('keyPress', {
                     inputId: 'right',
                     state: true
                 });
             else if (event.keyCode === 83) //s
-                socket.emit('keyPress', {
+                Client.socket.emit('keyPress', {
                     inputId: 'down',
                     state: true
                 });
             else if (event.keyCode === 65) //a
-                socket.emit('keyPress', {
+                Client.socket.emit('keyPress', {
                     inputId: 'left',
                     state: true
                 });
             else if (event.keyCode === 87) // w
-                socket.emit('keyPress', {
+                Client.socket.emit('keyPress', {
                     inputId: 'up',
                     state: true
                 });
@@ -45,22 +44,22 @@ var GameState = {
         }
         document.onkeyup = function (event) {
             if (event.keyCode === 68) //d
-                socket.emit('keyPress', {
+                Client.socket.emit('keyPress', {
                     inputId: 'right',
                     state: false
                 });
             else if (event.keyCode === 83) //s
-                socket.emit('keyPress', {
+                Client.socket.emit('keyPress', {
                     inputId: 'down',
                     state: false
                 });
             else if (event.keyCode === 65) //a
-                socket.emit('keyPress', {
+                Client.socket.emit('keyPress', {
                     inputId: 'left',
                     state: false
                 });
             else if (event.keyCode === 87) // w
-                socket.emit('keyPress', {
+                Client.socket.emit('keyPress', {
                     inputId: 'up',
                     state: false
                 });
@@ -71,36 +70,43 @@ var GameState = {
     },
     create: function () {
 
-        Client.socket.on('newPositions',function(data){
+        Client.socket.on('newPositions', function (data) {
             game.world.removeAll();
             game.background = game.add.sprite(0, 0, 'background');
-            for (var i=0;i<data.bombs.length;i++){
-                var bomb = data.bombs[i];
-                game.add.sprite(bomb.x,bomb.y,'bomb');
+            // for (var i=0;i<data.bombs.length;i++){
+            //     var bomb = data.bombs[i];
+            //     var player = data.players[i];
+            //     game.add.sprite(bomb.x,bomb.y,'bomb');
+            //     game.add.sprite(player.x,player.y,'player')
+            // }
+
+            for (var i = 0; i < data.players.length; i++) {
+                var player = data.players[i];
+                game.add.sprite(player.x, player.y, 'player')
             }
-            
+
         });
 
 
-        this.background = this.game.add.sprite(0, 0, 'background');
-        this.bomb = this.game.add.sprite(0, 0, 'bomb');
-        this.bomb.enlarge = true;
+        // this.background = this.game.add.sprite(0, 0, 'background');
+        // this.bomb = this.game.add.sprite(0, 0, 'bomb');
+        // this.bomb.enlarge = true;
     },
     update: function () {
 
-        if (this.bomb.enlarge == true) {
-            this.bomb.scale.x += 0.01;
-            this.bomb.scale.y += 0.01;
-            if (this.bomb.scale.x > 1.2) {
-                this.bomb.enlarge = false;
-            }
-        } else {
-            this.bomb.scale.x -= 0.01;
-            this.bomb.scale.y -= 0.01;
-            if (this.bomb.scale.x < 0.9) {
-                this.bomb.enlarge = true;
-            }
-        }
+        // if (this.bomb.enlarge == true) {
+        //     this.bomb.scale.x += 0.01;
+        //     this.bomb.scale.y += 0.01;
+        //     if (this.bomb.scale.x > 1.2) {
+        //         this.bomb.enlarge = false;
+        //     }
+        // } else {
+        //     this.bomb.scale.x -= 0.01;
+        //     this.bomb.scale.y -= 0.01;
+        //     if (this.bomb.scale.x < 0.9) {
+        //         this.bomb.enlarge = true;
+        //     }
+        // }
 
 
 
