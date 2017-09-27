@@ -54,32 +54,11 @@ var currentFrame = 0;
 setInterval(function () {
 
         var pack = {};
-/*
-        //Update players positions
-        for(var player in game.players){
-            var player = game.players[player];
 
-            //update players position
-            player.updatePosition();
-
-            pack["playerPosition"] = {
-                x: player.x,
-                y: player.y
-            };    
-        }
-
-        //Update bombs positions
-        for (var bomb in game.bombs){
-            var bomb = game.bombs[bomb];
-            
-            
-            pack["bombsPosition"] = {
-                x: bomb.x,
-                y: bomb.y
-            };
-        }
-*/
     var pack = {};
+
+    game.updateBombTimers();
+  
     currentFrame++;
     if (currentFrame > 1000)
         currentFrame=0;
@@ -93,28 +72,10 @@ setInterval(function () {
     } 
     pack["players"] = game.players;
     pack["bombs"] = game.bombs;
+    pack["explosions"] = game.explosions;
     pack["currentFrame"] = currentFrame;
 
 
-    /*
-    pack["players"] = [{
-            x: 500,
-            y: 500
-        },
-        {
-            x: 384,
-            y: 489
-        }
-    ];
-
-    pack["bombs"] = [{
-        x: 300,
-        y: 300
-    }, {
-        x: 700,
-        y: 700
-    }];
-    */
 
     //Update all clients states
     for (var i in SOCKET_LIST) {

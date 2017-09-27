@@ -13,6 +13,7 @@ var GameState = {
         this.load.image('bomb', 'assets/bomb.png');
         this.load.image('blast', 'assets/blast.png');
         this.load.image('player1', 'assets/RedFront.png');
+        this.load.image('explosion', 'assets/explosion.png');
         this.load.spritesheet('player','assets/down.png',45,72,4);
 
 
@@ -85,10 +86,11 @@ var GameState = {
             game.world.removeAll();
             game.background = game.add.sprite(0, 0, 'background');
             for (var i = 0; i < data.bombs.length; i++) {
-                var bomb = data.bombs[i];
-                game.add.sprite(bomb._x, bomb._y, 'bomb');
-            }
+                var bombPos = data.bombs[i];
+                var bomb = game.add.sprite(bombPos._x, bombPos._y, 'bomb');
 
+                bomb.scale.setTo(0.5,0.5);
+            }
             for (var i = 0; i < data.players.length; i++) {
                 var player = data.players[i];
                 var a = game.add.sprite(player._x, player._y, 'player');
@@ -97,16 +99,12 @@ var GameState = {
 
             }
 
-            // for (var i = 0; i < data.players.length; i++) {
-            //     var player = data.players[i];
-            //     // console.log(player);
-            //     var a = game.add.sprite(player._x, player._y, 'player');
-            //     a.animations.add('walk',[data.currentFrame%a.animations._frameData._frames.length]);
-               
-            //     // a.animations.add('walk');
-            //     a.animations.play('walk',1, false);
-            //     // game.add.tween(a).to({ x: 800 }, 20000, Phaser.Easing.Linear.None, true)
-            // }
+            for (var i = 0; i < data.explosions.length; i++) {
+                var explosion = data.explosions[i];
+                game.add.sprite(explosion._x, explosion._y, 'explosion');
+            }
+
+        });
 
         });
 
