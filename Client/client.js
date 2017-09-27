@@ -106,8 +106,6 @@ var GameState = {
 
         });
 
-        });
-
         // this.player = game.add.sprite(40, 100, 'demo1');
         // this.player.animations.add('walk');
         

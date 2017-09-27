@@ -81,6 +81,9 @@ class Game {
         //check if that player has bombs, otherwise return
         if (player.bombCount === 0)
             return false;
+        //check if grid location has bomb already (duplicates)
+        if(this._grid.getTileObject(player.row, player.col).hasOwnProperty('bomb'))
+            return false;
         //decrement players bombs
         player.bombCount--;
         //make bomb object giving player row! and col! and id
