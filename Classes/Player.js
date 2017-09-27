@@ -15,6 +15,7 @@ class Player extends Entity {
         this._pressingLeft = false;
         this._pressingUp = false;
         this._pressingDown = false;
+        this._pressingSpace = false;
         this._maxSpd = MAX_SPEED;
     }
 
@@ -36,6 +37,9 @@ class Player extends Entity {
     }
     get pressingDown() {
         return this._pressingDown;
+    }
+    get pressingSpace() {
+        return this._pressingSpace;
     }
     get maxSpd() {
         return this._maxSpd;
@@ -64,37 +68,40 @@ class Player extends Entity {
             case "down":
                 this._pressingDown = keyState;
                 break;
+            case "space":
+                this._pressingSpace = keyState;
+                break;
             default:
                 break;
         }
     }
 
     movePosition() {
-        if (this._pressingLeft)
-            this._x -= MAX_SPEED;
+        if (this.pressingLeft)
+            this.x -= MAX_SPEED;
 
-        if (this._pressingRight)
-            this._x += MAX_SPEED;
+        if (this.pressingRight)
+            this.x += MAX_SPEED;
 
-        if (this._pressingUp)
-            this._y -= MAX_SPEED;
+        if (this.pressingUp)
+            this.y -= MAX_SPEED;
 
-        if (this._pressingDown)
-            this._y += MAX_SPEED;
+        if (this.pressingDown)
+            this.y += MAX_SPEED;
     }
 
     revertMovement() {
-        if (this._pressingLeft)
-            this._x += MAX_SPEED;
+        if (this.pressingLeft)
+            this.x += MAX_SPEED;
 
-        if (this._pressingRight)
-            this._x -= MAX_SPEED;
+        if (this.pressingRight)
+            this.x -= MAX_SPEED;
 
-        if (this._pressingUp)
-            this._y += MAX_SPEED;
+        if (this.pressingUp)
+            this.y += MAX_SPEED;
 
-        if (this._pressingDown)
-            this._y -= MAX_SPEED;
+        if (this.pressingDown)
+            this.y -= MAX_SPEED;
     }
 }
 

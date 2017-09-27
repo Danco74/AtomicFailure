@@ -40,6 +40,11 @@ var GameState = {
                     inputId: 'up',
                     state: true
                 });
+            else if (event.keyCode === 32) // space
+                Client.socket.emit('keyPress', {
+                    inputId: 'space',
+                    state: true
+                });
 
         }
         document.onkeyup = function (event) {
@@ -63,6 +68,11 @@ var GameState = {
                     inputId: 'up',
                     state: false
                 });
+            else if (event.keyCode === 32) // space
+                Client.socket.emit('keyPress', {
+                    inputId: 'space',
+                    state: false
+                });
         }
 
 
@@ -73,13 +83,11 @@ var GameState = {
         Client.socket.on('newPositions', function (data) {
             game.world.removeAll();
             game.background = game.add.sprite(0, 0, 'background');
-            // for (var i=0;i<data.bombs.length;i++){
-            //     var bomb = data.bombs[i];
-            //     var player = data.players[i];
-            //     game.add.sprite(bomb.x,bomb.y,'bomb');
-            //     game.add.sprite(player.x,player.y,'player')
-            // }
-            
+            for (var i = 0; i < data.bombs.length; i++) {
+                var bomb = data.bombs[i];
+                game.add.sprite(bomb._x, bomb._y, 'bomb');
+            }
+
             for (var i = 0; i < data.players.length; i++) {
                 var player = data.players[i];
                 game.add.sprite(player._x, player._y, 'player')

@@ -1,6 +1,6 @@
 // Global Variables //
-var ROW_NUMBER = 15;
-var COL_NUMBER = 20;
+var ROW_NUMBER = 12;
+var COL_NUMBER = 12;
 
 // Class //
 class Grid {

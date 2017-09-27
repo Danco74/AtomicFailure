@@ -17,6 +17,9 @@ class Game {
     get players() {
         return this._players;
     }
+    get bombs() {
+        return this._bombs;
+    }
 
     // Other Methods //
     createPlayer(id) {
@@ -60,11 +63,23 @@ class Game {
 
     placeBomb(playerId) {
         //find player index in players array
+        var index = _findIndexById(this._players, playerId);
+        var player = this._players[index];
+        //check if player pressed space
+        if(!player.pressingSpace)
+            return false;
         //check if that player has bombs, otherwise return
+        if(player.bombCount === 0)
+            return false;
         //decrement players bombs
+        player.bombCount--;
         //make bomb object giving player row! and col! and id
+        var newBomb = new Bomb(playerId, player.row, player.col);
         //push bomb obj to array
+        this._bombs.push(newBomb);
         //add bomb to grid at row and col
+        this._grid.addToTile(player.row, player.col, 'bomb', playerId);
+        return true;
     }
 
     explodeBomb(bombId) {

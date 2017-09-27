@@ -85,9 +85,10 @@ setInterval(function () {
 
         //update players position
         game.movePlayer(player.id);
+        game.placeBomb(player.id);
     }
     pack["players"] = game.players;
-    pack["bombs"] = [];
+    pack["bombs"] = game.bombs;
 
 
     /*
