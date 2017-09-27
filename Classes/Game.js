@@ -38,6 +38,8 @@ class Game {
 
     deletePlayer(id) {
         var index = _findIndexById(this._players, id);
+        if(index < 0 || index >= this._players.length)
+            return false;
         this._players.splice(index, 1);
     }
 
@@ -55,6 +57,8 @@ class Game {
         var tileObject = this._grid.getTileObject(player.row, player.col);
         if (tileObject.hasOwnProperty('explosion')) {
             player.isDead = true;
+            var killerIndex = _findIndexById(this._players, tileObject.explosion);
+            this._players[killerIndex].points++;
             return true;
         }
         return false;
