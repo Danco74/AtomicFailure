@@ -110,7 +110,14 @@ var GameState = {
 
         });
 
-
+        // this.player = game.add.sprite(40, 100, 'demo1');
+        // this.player.animations.add('walk');
+        
+        // this.player.animations.play('walk', 10, true);
+        // console.log(this.player);
+        // this.player.x = 0;
+        
+        // game.add.tween(this.player).to({ x: 800 }, 10000, Phaser.Easing.Linear.None, true);
         // this.background = this.game.add.sprite(0, 0, 'background');
         // this.bomb = this.game.add.sprite(0, 0, 'bomb');
         // this.bomb.enlarge = true;

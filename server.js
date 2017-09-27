@@ -83,14 +83,14 @@ setInterval(function () {
     currentFrame++;
     if (currentFrame > 1000)
         currentFrame=0;
-
+  
     for(var player in game.players){
         var player = game.players[player];
 
         //update players position
         game.movePlayer(player.id);
         game.placeBomb(player.id);
-    }
+    } 
     pack["players"] = game.players;
     pack["bombs"] = game.bombs;
     pack["currentFrame"] = currentFrame;
@@ -121,5 +121,5 @@ setInterval(function () {
         var socket = SOCKET_LIST[i];
         socket.emit('newPositions', pack);
     }
-
 }, 60);
+
