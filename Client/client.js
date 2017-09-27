@@ -6,11 +6,6 @@ Client.socket = io.connect();
 
 
 
-
-
-
-
-
 var GameState = {
 
     preload: function () {
