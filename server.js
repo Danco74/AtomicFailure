@@ -83,7 +83,7 @@ setInterval(function () {
     currentFrame++;
     if (currentFrame > 1000)
         currentFrame=0;
-       
+  
     for(var player in game.players){
         var player = game.players[player];
 
