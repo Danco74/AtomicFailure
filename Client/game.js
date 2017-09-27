@@ -105,9 +105,9 @@ var GameState = {
                 game.add.sprite(explosion._x, explosion._y, 'explosion');
             }
 
-            // if(data.isDead){
-            //     game.add.text(game.world.centerX,game.world.centerY,"you are dead")
-            // }
+            if(data.isDead){
+                game.add.text(game.world.centerX,game.world.centerY,"you are dead")
+            }
 
         });
 

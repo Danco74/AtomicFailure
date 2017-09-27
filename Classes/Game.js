@@ -183,7 +183,6 @@ class Game {
 
                 if (playerIndex >= 0 && playerIndex < this._players.length) {
                     this.players[playerIndex].bombCount++;
-                    console.log(this.players[playerIndex].bombCount);
                 }
             }
         }
