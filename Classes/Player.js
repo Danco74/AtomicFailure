@@ -17,6 +17,7 @@ class Player extends Entity {
         this._pressingDown = false;
         this._pressingBomb = false;
         this._maxSpd = MAX_SPEED;
+        this._points = 0;
     }
 
     // Getters //
@@ -44,6 +45,9 @@ class Player extends Entity {
     get maxSpd() {
         return this._maxSpd;
     }
+    get points() {
+        return this._points;
+    }
 
     // Setters //
     set bombCount(newCount) {
@@ -51,6 +55,9 @@ class Player extends Entity {
     }
     set isDead(newBool) {
         this._isDead = newBool;
+    }
+    set points(newPoints) {
+        this._points = newPoints;
     }
 
     // Other Methods //

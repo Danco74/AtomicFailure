@@ -38,18 +38,45 @@ class Game {
 
     deletePlayer(id) {
         var index = _findIndexById(this._players, id);
+        if (index < 0 || index >= this._players.length)
+            return false;
         this._players.splice(index, 1);
     }
 
     updateKeys(id, direction, state) {
         var index = _findIndexById(this._players, id);
+        if (index < 0 || index >= this._players.length)
+            return false;
         var player = this._players[index];
         player.updateKeyPresses(direction, state);
+    }
+
+    checkDeath(id) {
+        var index = _findIndexById(this._players, id);
+        var player = this._players[index];
+        var tileObject = this._grid.getTileObject(player.row, player.col);
+        if (tileObject.hasOwnProperty('explosion')) {
+            player.isDead = true;
+            var killerIndex = _findIndexById(this._players, tileObject.explosion);
+            this._players[killerIndex].points++;
+            return true;
+        }
+        return false;
+    }
+
+    killPlayer(id) {
+        var index = _findIndexById(this._players, id);
+        if (index < 0 || index >= this._players.length)
+            return false;
+        this._players.splice(index, 1);
     }
 
     movePlayer(id) {
         var index = _findIndexById(this._players, id);
         var player = this._players[index];
+        this.checkDeath(id);
+        if (player.isDead)
+            return false;
         var originalGridPos = {
             row: player.row,
             col: player.col
@@ -82,7 +109,7 @@ class Game {
         if (player.bombCount === 0)
             return false;
         //check if grid location has bomb already (duplicates)
-        if(this._grid.getTileObject(player.row, player.col).hasOwnProperty('bomb'))
+        if (this._grid.getTileObject(player.row, player.col).hasOwnProperty('bomb'))
             return false;
         //decrement players bombs
         player.bombCount--;
@@ -128,55 +155,60 @@ class Game {
 
     }
 
-
-removeExplosion(refId, row, col) {
-    for (var i = 0; i < this._explosions.length; i++) {
-        var explosion = this._explosions[i];
-        if (explosion.refId == refId) {
-            this._explosions.splice(i, 1);
-            this._grid.removeFromTile(row, col, 'explosion');
+    removeExplosion(refId, row, col) {
+        var playerId = null;
+        for (var i = 0; i < this._explosions.length; i++) {
+            var explosion = this._explosions[i];
+            if (explosion.refId == refId) {
+                playerId = this._explosions[i].id;
+                this._explosions.splice(i, 1);
+                this._grid.removeFromTile(row, col, 'explosion');
+            }
         }
     }
-}
 
 
-//Handle bomb explosion
-explodeBomb(bombId) {
-    for (var i = 0; i < this._bombs.length; i++) {
-        var bomb = this._bombs[i];
-        if (bomb.refId == bombId) {
-            var bombRow = bomb.row;
-            var bombCol = bomb.col;
-            var explosionRadius = bomb.radius;
-            this._grid.removeFromTile(bombRow, bombCol, 'bomb');
-            this._bombs.splice(i, 1);
-            this.createExplosion(bomb.id, bombRow, bombCol, explosionRadius);
+    //Handle bomb explosion
+    explodeBomb(bombId) {
+        for (var i = 0; i < this._bombs.length; i++) {
+            var bomb = this._bombs[i];
+            if (bomb.refId == bombId) {
+                var bombRow = bomb.row;
+                var bombCol = bomb.col;
+                var explosionRadius = bomb.radius;
+                this._grid.removeFromTile(bombRow, bombCol, 'bomb');
+                var playerIndex = _findIndexById(this._players, bomb.id);
+                this._bombs.splice(i, 1);
+                this.createExplosion(bomb.id, bombRow, bombCol, explosionRadius);
 
+                if (playerIndex >= 0 && playerIndex < this._players.length) {
+                    this.players[playerIndex].bombCount++;
+                    console.log(this.players[playerIndex].bombCount);
+                }
+            }
         }
     }
-}
 
-//Update all bomb timers
-updateBombTimers() {
-    for (var i = 0; i < this._bombs.length; i++) {
-        var isTimerZero = this._bombs[i].decreaseTimer();
-        if (isTimerZero == 0) {
-            this.explodeBomb(this._bombs[i].refId);
+    //Update all bomb timers
+    updateBombTimers() {
+        for (var i = 0; i < this._bombs.length; i++) {
+            var isTimerZero = this._bombs[i].decreaseTimer();
+            if (isTimerZero == 0) {
+                this.explodeBomb(this._bombs[i].refId);
+            }
         }
     }
-}
 
-//Update all bomb timers
-updateExplosionTimers() {
-    for (var i = 0; i < this._explosions.length; i++) {
-        var explosion = this._explosions[i];
-        var isTimerZero = explosion.decreaseTimer();
-        if (isTimerZero == 0) {
-            this.removeExplosion(explosion.refId, explosion.row, explosion.col);
+    //Update all bomb timers
+    updateExplosionTimers() {
+        for (var i = 0; i < this._explosions.length; i++) {
+            var explosion = this._explosions[i];
+            var isTimerZero = explosion.decreaseTimer();
+            if (isTimerZero == 0) {
+                this.removeExplosion(explosion.refId, explosion.row, explosion.col);
+            }
         }
     }
-}
-
 
 }
 

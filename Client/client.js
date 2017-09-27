@@ -1,5 +1,5 @@
 //Create a new game object
-var game = new Phaser.Game(1200, 1000, Phaser.AUTO);
+var game = new Phaser.Game(800, 800, Phaser.AUTO);
 
 
 //Create client object to handle server communications
@@ -104,12 +104,16 @@ var GameState = {
                 var a = game.add.sprite(player._x, player._y, 'player');
                 a.animations.add('walk', [data.currentFrame % a.animations._frameData._frames.length]);
                 a.animations.play('walk', 1, false);
-
+                console.log(player._points);
             }
             //Draw explosions
             for (var i = 0; i < data.explosions.length; i++) {
                 var explosion = data.explosions[i];
                 game.add.sprite(explosion._x, explosion._y, 'explosion');
+            }
+
+            if(data.isDead){
+                game.add.text(game.world.centerX, game.world.centerY, 'you are dead');
             }
 
         });
