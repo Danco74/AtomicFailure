@@ -121,5 +121,5 @@ setInterval(function () {
         var socket = SOCKET_LIST[i];
         socket.emit('newPositions', pack);
     }
+}, 60);
 
-}, 80);
