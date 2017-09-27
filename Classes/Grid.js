@@ -22,6 +22,9 @@ class Grid {
     addToTile(row, col, objName, id) { // objName = 'player' | 'bomb' | 'explosion' | 'block'
         this._matrix[row][col][objName] = id; 
     }
+    getGridDimensions(){
+        return {row:ROW_NUMBER,col:COL_NUMBER};
+    }
 }
 
 // Export //

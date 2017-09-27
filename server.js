@@ -58,6 +58,7 @@ setInterval(function () {
     var pack = {};
 
     game.updateBombTimers();
+    game.updateExplosionTimers();
   
     currentFrame++;
     if (currentFrame > 1000)
