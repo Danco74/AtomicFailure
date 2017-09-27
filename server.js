@@ -96,12 +96,12 @@ setInterval(function () {
     var pack = {};
 
     pack["players"] = [{
-            x: 500,
-            y: 500
+            x: 0,
+            y: 200
         },
         {
-            x: 384,
-            y: 489
+            x: 100,
+            y: 200
         }
     ];
 
