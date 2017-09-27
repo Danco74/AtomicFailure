@@ -6,15 +6,16 @@ var MAX_SPEED = 10;
 var Entity = require('./Entity');
 
 // Class //
-class Player extends Entity{
-    constructor(id, xPos, yPos) {
-        super(id, xPos, yPos);
+class Player extends Entity {
+    constructor(id, row, col) {
+        super(id, row, col);
         this._bombCount = STARTING_BOMBS;
         this._isDead = false;
         this._pressingRight = false;
         this._pressingLeft = false;
         this._pressingUp = false;
         this._pressingDown = false;
+        this._pressingBomb = false;
         this._maxSpd = MAX_SPEED;
     }
 
@@ -37,6 +38,9 @@ class Player extends Entity{
     get pressingDown() {
         return this._pressingDown;
     }
+    get pressingBomb() {
+        return this._pressingBomb;
+    }
     get maxSpd() {
         return this._maxSpd;
     }
@@ -48,33 +52,56 @@ class Player extends Entity{
     set isDead(newBool) {
         this._isDead = newBool;
     }
-    set pressingRight(newBool) {
-        this._pressingRight = newBool;
-    }
-    set pressingLeft(newBool) {
-        this._pressingLeft = newBool;
-    }
-    set pressingUp(newBool) {
-        this._pressingUp = newBool;
-    }
-    set pressingDown(newBool) {
-        this._pressingDown = newBool;
-    }
 
     // Other Methods //
-    updatePosition() {
-        if(pressingRight) {
-            this._x += 1;
+    updateKeyPresses(direction, keyState) {
+        switch (direction) {
+            case "left":
+                this._pressingLeft = keyState;
+                break;
+            case "right":
+                this._pressingRight = keyState;
+                break;
+            case "up":
+                this._pressingUp = keyState;
+                break;
+            case "down":
+                this._pressingDown = keyState;
+                break;
+            case "bomb":
+                this._pressingBomb = keyState;
+                break;
+            default:
+                break;
         }
-        if(pressingLeft) {
-            this._x -= 1;
-        }
-        if(pressingUp) {
-            this._y -= 1;
-        }
-        if(pressingDown) {
-            this._y += 1;
-        }
+    }
+
+    movePosition() {
+        if (this.pressingLeft)
+            this.x -= MAX_SPEED;
+
+        if (this.pressingRight)
+            this.x += MAX_SPEED;
+
+        if (this.pressingUp)
+            this.y -= MAX_SPEED;
+
+        if (this.pressingDown)
+            this.y += MAX_SPEED;
+    }
+
+    revertMovement() {
+        if (this.pressingLeft)
+            this.x += MAX_SPEED;
+
+        if (this.pressingRight)
+            this.x -= MAX_SPEED;
+
+        if (this.pressingUp)
+            this.y += MAX_SPEED;
+
+        if (this.pressingDown)
+            this.y -= MAX_SPEED;
     }
 }
 

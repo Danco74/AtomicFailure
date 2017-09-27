@@ -17,6 +17,9 @@ class Game {
     get players() {
         return this._players;
     }
+    get bombs() {
+        return this._bombs;
+    }
 
     // Other Methods //
     createPlayer(id) {
@@ -32,26 +35,51 @@ class Game {
         this._players.splice(index, 1);
     }
 
-    movePlayer(id, direction) {
+    updateKeys(id, direction, state) {
         var index = _findIndexById(this._players, id);
-        var newCoordinates = { x: this._players[index].x, y: this._players[index].y };
-        _movePosition(direction, newCoordinates); // Updates newCoordinates
-        var tileObject = this._grid.getTileObject(newCoordinates.x, newCoordinates.y);
+        var player = this._players[index];
+        player.updateKeyPresses(direction, state);
+    }
 
-        // if (!tileObject.block || !tileObject.bomb) { // Checks if new tile has a bomb or block
-        //     console.log("this is false")
-        //     return false;
-        // }
+    movePlayer(id) {
+        var index = _findIndexById(this._players, id);
+        var player = this._players[index];
+        var originalGridPos = {row: player.row, col: player.col}
+        player.movePosition();
+        var tileObject = this._grid.getTileObject(player.row, player.col); // will return false if out of bounds
+        if(!tileObject) {
+            player.revertMovement();
+            return false;
+        }
+        if (tileObject.hasOwnProperty('block') || tileObject.hasOwnProperty('bomb')) { // Checks if new tile has a bomb or block
+            player.revertMovement();
+            return false;
+        }
         // else
-        this._grid.removeFromTile(this._players[index].x, this._players[index].y, 'player')
-        this._grid.addToTile(newCoordinates.x, newCoordinates.y, 'player', id);
-        this._players[index].x = newCoordinates.x;
-        this._players[index].y = newCoordinates.y;
+        this._grid.removeFromTile(originalGridPos.row, originalGridPos.col, 'player')
+        this._grid.addToTile(player.row, player.col, 'player', id);
         return true;
     }
 
     placeBomb(playerId) {
-
+        //find player index in players array
+        var index = _findIndexById(this._players, playerId);
+        var player = this._players[index];
+        //check if player pressed enter
+        if(!player.pressingBomb)
+            return false;
+        //check if that player has bombs, otherwise return
+        if(player.bombCount === 0)
+            return false;
+        //decrement players bombs
+        player.bombCount--;
+        //make bomb object giving player row! and col! and id
+        var newBomb = new Bomb(playerId, player.row, player.col);
+        //push bomb obj to array
+        this._bombs.push(newBomb);
+        //add bomb to grid at row and col
+        this._grid.addToTile(player.row, player.col, 'bomb', playerId);
+        return true;
     }
 
     explodeBomb(bombId) {
@@ -69,23 +97,4 @@ function _findIndexById(array, id) {
         return currentObj.id === id;
     });
     return index;
-}
-
-function _movePosition(direction, coordinates) {
-    switch (direction) {
-        case "left":
-            coordinates.x--;
-            break;
-        case "right":
-            coordinates.x++;
-            break;
-        case "up":
-            coordinates.y++;
-            break;
-        case "down":
-            coordinates.y--;
-            break;
-        default:
-            break;
-    }
 }

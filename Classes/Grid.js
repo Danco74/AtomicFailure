@@ -1,6 +1,6 @@
 // Global Variables //
-var ROW_NUMBER = 15;
-var COL_NUMBER = 20;
+var ROW_NUMBER = 12;
+var COL_NUMBER = 12;
 
 // Class //
 class Grid {
@@ -9,9 +9,11 @@ class Grid {
     }
 
     // Other Methods //
-    // getTileObject(row, col) {
-    //     return this._matrix[row][col];
-    // }
+    getTileObject(row, col) {
+        if( (row < 0) || (row > ROW_NUMBER - 1) || (col < 0) || (col > COL_NUMBER - 1) )
+            return false;
+        return this._matrix[row][col];
+    }
 
     removeFromTile(row, col, objName) { // objName = 'player' | 'bomb' | 'explosion' | 'block'
         delete this._matrix[row][col][objName]; 

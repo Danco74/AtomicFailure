@@ -3,8 +3,8 @@ var Entity = require('./Entity');
 
 // Class //
 class Block extends Entity{
-    constructor(id, xPos, yPos) {
-        super(id, xPos, yPos);
+    constructor(id, row, col) {
+        super(id, row, col);
     }
 }
 

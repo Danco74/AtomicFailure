@@ -7,8 +7,8 @@ var Entity = require('./Entity');
 
 // Class //
 class Bomb extends Entity{
-    constructor(id, xPos, yPos) {
-        super(id, xPos, yPos);
+    constructor(id, row, col) {
+        super(id, row, col);
         this._radius = EXPLOSION_RADIUS;
         this._timer = TIMER;
     }
