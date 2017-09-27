@@ -11,6 +11,7 @@ var game = new Game();
 
 
 app.use('/', express.static(__dirname + '/client'));
+app.use('/', express.static(__dirname + '/node_modules'));
 
 
 //Server startup
@@ -52,8 +53,6 @@ io.sockets.on('connection', function (socket) {
 
 var currentFrame = 0;
 setInterval(function () {
-
-        var pack = {};
 
     var pack = {};
 

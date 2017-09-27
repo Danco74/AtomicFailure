@@ -9,9 +9,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "express": "^4.15.5",
     "jquery": "^3.2.1",
     "mongoose": "^4.11.13",
     "socket.io": "^2.0.3"
+  },
+  "devDependencies": {
+    "@orange-games/phaser-input": "^2.0.5",
+    "phaser-input": "^1.2.6"
   }
 }
