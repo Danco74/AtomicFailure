@@ -32,15 +32,24 @@ class Game {
         this._players.splice(index, 1);
     }
 
-    movePlayer(id, direction, keyState) {
+    updateKeys(id, direction, state) {
+        var index = _findIndexById(this._players, id);
+        var player = this._players[index];
+        player.updateKeyPresses(direction, state);
+    }
+
+    movePlayer(id) {
         var index = _findIndexById(this._players, id);
         var player = this._players[index];
         var originalGridPos = {row: player.row, col: player.col}
-        player.movePosition(direction, keyState);
-        var tileObject = this._grid.getTileObject(player.row, player.col);
-
+        player.movePosition();
+        var tileObject = this._grid.getTileObject(player.row, player.col); // will return false if out of bounds
+        if(!tileObject) {
+            player.revertMovement();
+            return false;
+        }
         if (tileObject.hasOwnProperty('block') || tileObject.hasOwnProperty('bomb')) { // Checks if new tile has a bomb or block
-            player.revertMovement(direction);
+            player.revertMovement();
             return false;
         }
         // else

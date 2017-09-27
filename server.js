@@ -45,7 +45,7 @@ io.sockets.on('connection', function (socket) {
     //When a key press message is being sent from the client, do the folloing:
     socket.on('keyPress', function (data) {
         console.log(data);
-            game.movePlayer(socket.id, data.inputId, data.state);
+            game.updateKeys(socket.id, data.inputId, data.state);
     });
 
 });
@@ -80,7 +80,12 @@ setInterval(function () {
         }
 */
     var pack = {};
+    for(var player in game.players){
+        var player = game.players[player];
 
+        //update players position
+        game.movePlayer(player.id);
+    }
     pack["players"] = game.players;
     pack["bombs"] = [];
 

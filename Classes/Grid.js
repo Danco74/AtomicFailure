@@ -10,6 +10,8 @@ class Grid {
 
     // Other Methods //
     getTileObject(row, col) {
+        if( (row < 0) || (row > ROW_NUMBER - 1) || (col < 0) || (col > COL_NUMBER - 1) )
+            return false;
         return this._matrix[row][col];
     }
 

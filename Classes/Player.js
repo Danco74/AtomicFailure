@@ -6,7 +6,7 @@ var MAX_SPEED = 10;
 var Entity = require('./Entity');
 
 // Class //
-class Player extends Entity{
+class Player extends Entity {
     constructor(id, row, col) {
         super(id, row, col);
         this._bombCount = STARTING_BOMBS;
@@ -48,56 +48,53 @@ class Player extends Entity{
     set isDead(newBool) {
         this._isDead = newBool;
     }
-    set pressingRight(newBool) {
-        this._pressingRight = newBool;
-    }
-    set pressingLeft(newBool) {
-        this._pressingLeft = newBool;
-    }
-    set pressingUp(newBool) {
-        this._pressingUp = newBool;
-    }
-    set pressingDown(newBool) {
-        this._pressingDown = newBool;
-    }
 
     // Other Methods //
-    movePosition(direction, keyState) {
+    updateKeyPresses(direction, keyState) {
         switch (direction) {
             case "left":
-                this._x-=MAX_SPEED;
+                this._pressingLeft = keyState;
                 break;
             case "right":
-                this._x+=MAX_SPEED;
+                this._pressingRight = keyState;
                 break;
             case "up":
-                this._y-=MAX_SPEED;
+                this._pressingUp = keyState;
                 break;
             case "down":
-                this._y+=MAX_SPEED;
+                this._pressingDown = keyState;
                 break;
             default:
                 break;
         }
     }
 
-    revertMovement(direction) {
-        switch (direction) {
-            case "left":
-                this._x+=MAX_SPEED;
-                break;
-            case "right":
-                this._x-=MAX_SPEED;
-                break;
-            case "up":
-                this._y+=MAX_SPEED;
-                break;
-            case "down":
-                this._y-=MAX_SPEED;
-                break;
-            default:
-                break;
-        }
+    movePosition() {
+        if (this._pressingLeft)
+            this._x -= MAX_SPEED;
+
+        if (this._pressingRight)
+            this._x += MAX_SPEED;
+
+        if (this._pressingUp)
+            this._y -= MAX_SPEED;
+
+        if (this._pressingDown)
+            this._y += MAX_SPEED;
+    }
+
+    revertMovement() {
+        if (this._pressingLeft)
+            this._x += MAX_SPEED;
+
+        if (this._pressingRight)
+            this._x -= MAX_SPEED;
+
+        if (this._pressingUp)
+            this._y += MAX_SPEED;
+
+        if (this._pressingDown)
+            this._y -= MAX_SPEED;
     }
 }
 
