@@ -50,7 +50,7 @@ io.sockets.on('connection', function (socket) {
 
 });
 
-
+var currentFrame = 0;
 setInterval(function () {
 
         var pack = {};
@@ -80,9 +80,14 @@ setInterval(function () {
         }
 */
     var pack = {};
-
+    currentFrame++;
+    if (currentFrame > 7)
+        currentFrame=0;
+    
     pack["players"] = game.players;
     pack["bombs"] = [];
+    pack["currentFrame"] = currentFrame;
+    
 
 
     /*
@@ -111,4 +116,4 @@ setInterval(function () {
         socket.emit('newPositions', pack);
     }
 
-}, 1000 / 25);
+}, 40);

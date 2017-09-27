@@ -9,9 +9,9 @@ class Grid {
     }
 
     // Other Methods //
-    getTileObject(row, col) {
-        return this._matrix[row][col];
-    }
+    // getTileObject(row, col) {
+    //     return this._matrix[row][col];
+    // }
 
     removeFromTile(row, col, objName) { // objName = 'player' | 'bomb' | 'explosion' | 'block'
         delete this._matrix[row][col][objName]; 

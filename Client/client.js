@@ -13,6 +13,8 @@ var GameState = {
         this.load.image('bomb', 'assets/bomb.png');
         this.load.image('blast', 'assets/blast.png');
         this.load.image('player', 'assets/RedFront.png');
+        this.load.spritesheet('demo', 'assets/capguy-walk.png', 185, 325, 7);
+        this.load.spritesheet('demo1', 'assets/capguy-walk_copy.png', 64, 64, 7);
 
 
         Client.socket.on('newPositions', function (data) {
@@ -82,12 +84,24 @@ var GameState = {
 
             for (var i = 0; i < data.players.length; i++) {
                 var player = data.players[i];
-                game.add.sprite(player.x, player.y, 'player')
+                // console.log(player);
+                var a = game.add.sprite(player.x, player.y, 'demo');
+                a.animations.add('walk',[data.currentFrame]);
+                // a.animations.add('walk');
+                // a.animations.play('walk', 30, true);
+                // game.add.tween(a).to({ x: 800 }, 20000, Phaser.Easing.Linear.None, true);
             }
 
         });
 
-
+        // this.player = game.add.sprite(40, 100, 'demo1');
+        // this.player.animations.add('walk');
+        
+        // this.player.animations.play('walk', 10, true);
+        // console.log(this.player);
+        // this.player.x = 0;
+        
+        // game.add.tween(this.player).to({ x: 800 }, 10000, Phaser.Easing.Linear.None, true);
         // this.background = this.game.add.sprite(0, 0, 'background');
         // this.bomb = this.game.add.sprite(0, 0, 'bomb');
         // this.bomb.enlarge = true;

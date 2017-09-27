@@ -38,9 +38,10 @@ class Game {
         _movePosition(direction, newCoordinates); // Updates newCoordinates
         var tileObject = this._grid.getTileObject(newCoordinates.x, newCoordinates.y);
 
-        if (tileObject.block || tileObject.bomb) { // Checks if new tile has a bomb or block
-            return false;
-        }
+        // if (!tileObject.block || !tileObject.bomb) { // Checks if new tile has a bomb or block
+        //     console.log("this is false")
+        //     return false;
+        // }
         // else
         this._grid.removeFromTile(this._players[index].x, this._players[index].y, 'player')
         this._grid.addToTile(newCoordinates.x, newCoordinates.y, 'player', id);
