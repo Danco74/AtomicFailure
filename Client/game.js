@@ -56,8 +56,6 @@ var GameState = {
                     state: false
                 });
         }
-
-
     },
     create: function () {
         var on;
@@ -85,15 +83,19 @@ var GameState = {
             else{
                 on='';
                 return "playerDown";
-
             }
-
         }
         
             Client.socket.on('newPositions', function (data) {
             game.world.removeAll();
            
             game.background = game.add.sprite(0, 0, 'background');
+
+            for (var i=0;i<data.blocks.length;i++){
+                var block = data.blocks[i];
+                game.add.sprite(block._x,block._y,'sink');
+                // Scale sink??
+            }
 
             var x_count = 675;
             var y_count = 0;
@@ -139,10 +141,6 @@ var GameState = {
             if(data.isDead){
                 game.add.text(game.world.centerX,game.world.centerY,"you are dead");
             }
-            // for (var i=0;i<data.blocks.length;i++){
-            //     var block = data.blocks[i];
-            //     block.add.sprite(block._x,block._y,'sink');
-            // }
         });
 
     },

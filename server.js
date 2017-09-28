@@ -18,7 +18,8 @@ var Game = require('./Classes/Game');
 var game = new Game();
 
 game._grid.setImpassableRow(0, Math.random());
-var DEFAULT_BLOCKS = [{id: Math.random(), row: 4, col: 2},
+var DEFAULT_BLOCKS = [
+                      {id: Math.random(), row: 4, col: 2},
                       {id: Math.random(), row: 4, col: 5},
                       {id: Math.random(), row: 4, col: 8},
                       {id: Math.random(), row: 7, col: 2},
@@ -28,7 +29,6 @@ var DEFAULT_BLOCKS = [{id: Math.random(), row: 4, col: 2},
                       {id: Math.random(), row: 10, col: 5},
                       {id: Math.random(), row: 10, col: 8}
                     ];
-game.createBlocks(DEFAULT_BLOCKS);
 
 app.use('/', express.static(__dirname + '/client'));
 app.use('/', express.static(__dirname + '/node_modules'));
@@ -52,6 +52,8 @@ io.sockets.on('connection', function (socket) {
     //add the new session into the socket list
     SOCKET_LIST[socket.id] = socket;
 
+    game.createBlocks(DEFAULT_BLOCKS);
+    
     //create new player
     game.createPlayer(socket.id); 
 
@@ -76,7 +78,7 @@ io.sockets.on('connection', function (socket) {
     
     //When a key press message is being sent from the client, do the folloing:
     socket.on('keyPress', function (data) {
-            game.updateKeys(socket.id, data.inputId, data.state);
+        game.updateKeys(socket.id, data.inputId, data.state);
     });
 
 });
@@ -116,7 +118,7 @@ setInterval(function () {
     pack["explosions"] = game.explosions;
     pack["currentFrame"] = currentFrame;
     pack["isDead"] = false;
-    pack["blocks"] = game._blocks;
+    pack["blocks"] = game.blocks;
 
 
     //Update all clients states
@@ -137,7 +139,7 @@ setInterval(function () {
             return currentObj.id === parseFloat(i);
         });
         if(index >= 0) {
-            pack["score"] = game._players[index]._score;
+            pack["score"] = game.players[index]._score;
         }
         socket.emit('newPositions', pack);
         pack["isDead"] = false;

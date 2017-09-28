@@ -32,10 +32,10 @@ class Game {
     // Other Methods //
 
     createBlocks(arrayOfPos) {
-        for(var i = 0; i < arrayOfPos; i++) {
+        for(var i = 0; i < arrayOfPos.length; i++) {
             var newBlock = new Block(arrayOfPos[i].id, arrayOfPos[i].row, arrayOfPos[i].col);
             this._blocks.push(newBlock);
-            this._grid.addToTile(newBlock.row, newBlock.col, 'block', id);
+            this._grid.addToTile(newBlock.row, newBlock.col, 'block', newBlock.id);
         }
     }
 
@@ -43,7 +43,7 @@ class Game {
         var random = this._grid.randomGridPlacement();
         var newPlayer = new Player(id, random.row, random.col);
         this._players.push(newPlayer);
-        // return newPlayer? or return index inside this._players?
+        this._grid.addToTile(newPlayer.row, newPlayer.col, 'player', id);
     }
 
     updatePlayerName(username, id) {
