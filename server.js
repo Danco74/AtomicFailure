@@ -105,6 +105,7 @@ setInterval(function () {
     pack["explosions"] = game.explosions;
     pack["currentFrame"] = currentFrame;
     pack["isDead"] = false;
+    pack["blocks"] = game._blocks;
 
 
     //Update all clients states
