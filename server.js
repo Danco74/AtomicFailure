@@ -127,6 +127,7 @@ setInterval(function () {
         });
         if(isDeadIndex >= 0) {
             pack["isDead"] = true;
+            pack["score"] = DEAD_PLAYERS[isDeadIndex].score;
             if (!DEAD_PLAYERS[isDeadIndex].saved){
             dbHelper.addScore(DEAD_PLAYERS[isDeadIndex].id, DEAD_PLAYERS[isDeadIndex].username,DEAD_PLAYERS[isDeadIndex].score);
             DEAD_PLAYERS[isDeadIndex].saved = true;

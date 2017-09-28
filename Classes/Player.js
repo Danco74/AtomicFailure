@@ -2,6 +2,15 @@
 var STARTING_BOMBS = 3;
 var MAX_SPEED = 10;
 
+var PRESSING = {
+    UP : "up", 
+    DOWN : "down", 
+    LEFT : "left", 
+    RIGHT : "right", 
+    BOMB : "bomb",
+    NONE: "none" 
+  };
+  
 // Imports //
 var Entity = require('./Entity');
 
@@ -13,6 +22,7 @@ class Player extends Entity {
         this._isDead = false;
         this._pressingRight = false;
         this._pressingLeft = false;
+        this._pressing = PRESSING.NONE;
         this._pressingUp = false;
         this._pressingDown = false;
         this._pressingBomb = false;

@@ -172,9 +172,6 @@ class Game {
             }
         }
 
-        
-        console.log(this._grid);
-        console.log(this._players);
 
     }
 
