@@ -36,6 +36,14 @@ class Game {
         // return newPlayer? or return index inside this._players?
     }
 
+    updatePlayerName(username, id) {
+        var index = _findIndexById(this._players, id);
+        if (index < 0 || index >= this._players.length)
+            return false;
+        this.players[index].username = username;
+        return true;
+    }
+
     deletePlayer(id) {
         var index = _findIndexById(this._players, id);
         if (index < 0 || index >= this._players.length)
