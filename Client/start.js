@@ -9,6 +9,10 @@ var StartState = {
         game.add.text(100,100,"HighScore 1:"+x+" \nHighScore 2: \nHighScore 3: \nHighScore 4: \nHighScore 5: ",{
             fill:'#FF0000'
         })
+        
+        music = game.add.audio('music');
+        music.play();
+        
 
         var pressEnter = game.add.text(300,400,"Press Enter To Start");
         pressEnter.font = '100px monospace';
