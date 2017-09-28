@@ -112,7 +112,7 @@ var GameState = {
             var scoreText = game.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
             for (var i = 0; i < data.bombs.length; i++) {
                 var bombPos = data.bombs[i];
-                var bomb = game.add.sprite(bombPos._x, bombPos._y, 'potionshome');
+                var bomb = game.add.sprite(bombPos._x, bombPos._y, 'potions');
                 bomb.animations.add('bomb', [data.currentFrame % bomb.animations._frameData._frames.length]);
                 bomb.animations.play('bomb', 1, false);
                 // bomb.scale.setTo(0.5, 0.5);
