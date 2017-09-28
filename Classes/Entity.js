@@ -31,11 +31,11 @@ class Entity {
     // Setters //
     set x(newPos) {
         this._x = newPos;
-        this._row = Math.round(this._x / GRID_PIXEL_CONVERSION);
+        this._col = Math.round(this._x / GRID_PIXEL_CONVERSION);
     }
     set y(newPos) {
         this._y = newPos;
-        this._col = Math.round(this._y / GRID_PIXEL_CONVERSION);
+        this._row = Math.round(this._y / GRID_PIXEL_CONVERSION);
     }
 
     // Other Methods //

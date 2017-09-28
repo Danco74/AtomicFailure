@@ -13,7 +13,7 @@ class MongoHelper {
     }
 
     //Add score to database
-    addScore(playerName,score){
+    addScore(playerId,playerName,score){
         console.log("stam");
         var newScore = new this._Score({
             name: playerName,

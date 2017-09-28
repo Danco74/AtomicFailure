@@ -57,13 +57,14 @@ io.sockets.on('connection', function (socket) {
         //delete player
         game.deletePlayer(socket.id);
         //delete dead player message
-        DEAD_PLAYERS.splice(DEAD_PLAYERS.indexOf(parseFloat(socket.id)), 1);
+        DEAD_PLAYERS.splice(DEAD_PLAYERS.findIndex(function(obj){
+            return obj.id === parseFloat(socket.id);
+        }), 1);
     });
 
     
     //When a key press message is being sent from the client, do the folloing:
     socket.on('keyPress', function (data) {
-        console.log(data);
             game.updateKeys(socket.id, data.inputId, data.state);
     });
 
@@ -90,12 +91,12 @@ setInterval(function () {
         //update players position
         game.movePlayer(player.id);
         if(player.isDead)
-            DEAD_PLAYERS.push(player.id);
+            DEAD_PLAYERS.push({id: player.id, username: player.username, score: player.score, saved:false});
         game.placeBomb(player.id);
     } 
 
     for(var i in DEAD_PLAYERS) {
-        game.killPlayer(DEAD_PLAYERS[i])
+        game.killPlayer(DEAD_PLAYERS[i].id)
     }
 
     pack["players"] = game.players;
@@ -109,9 +110,15 @@ setInterval(function () {
     //Update all clients states
     for (var i in SOCKET_LIST) {
         var socket = SOCKET_LIST[i];
-        var isDeadIndex = DEAD_PLAYERS.indexOf(parseFloat(i));
+        var isDeadIndex = DEAD_PLAYERS.findIndex(function(obj){
+            return obj.id === parseFloat(i);
+        });
         if(isDeadIndex >= 0) {
             pack["isDead"] = true;
+            if (!DEAD_PLAYERS[isDeadIndex].saved){
+            dbHelper.addScore(DEAD_PLAYERS[isDeadIndex].id, DEAD_PLAYERS[isDeadIndex].username,DEAD_PLAYERS[isDeadIndex].score);
+            DEAD_PLAYERS[isDeadIndex].saved = true;
+            }
         }
         socket.emit('newPositions', pack);
         pack["isDead"] = false;

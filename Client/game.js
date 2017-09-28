@@ -100,12 +100,13 @@ var GameState = {
                 var a = game.add.sprite(player._x+8, player._y+10, playerImage);
                 a.animations.add('walk', [data.currentFrame % a.animations._frameData._frames.length]);
                 a.animations.play('walk', 1, false);
-
+                
             }
 
             for (var i = 0; i < data.explosions.length; i++) {
                 var explosion = data.explosions[i];
-                game.add.sprite(explosion._x, explosion._y, 'explosion');
+                var exp = game.add.sprite(explosion._x, explosion._y, 'explosion');
+                exp.scale.setTo(0.5, 0.5);
             }
 
             if(data.isDead){

@@ -101,6 +101,7 @@ class Game {
             return false;
         }
         // else
+        this.checkDeath(id);
         this._grid.removeFromTile(originalGridPos.row, originalGridPos.col, 'player')
         this._grid.addToTile(player.row, player.col, 'player', id);
         return true;
@@ -160,6 +161,10 @@ class Game {
                 this._explosions.push(explosion);
             }
         }
+
+        
+        console.log(this._grid);
+        console.log(this._players);
 
     }
 
