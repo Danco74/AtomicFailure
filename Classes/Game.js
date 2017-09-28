@@ -28,6 +28,15 @@ class Game {
     }
 
     // Other Methods //
+
+    createBlock(id, row, col) {
+
+    }
+
+    createBlocks() {
+
+    }
+
     createPlayer(id) {
         var xPos = 0; // Math.random???
         var yPos = 0;

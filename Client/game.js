@@ -63,50 +63,65 @@ var GameState = {
 
     },
     create: function () {
-        function selectPlayerImage(player) {
-            if (player._pressingRight) {
+        var on;
+        function selectPlayerImage(playerPos) {
+            if (playerPos._pressingRight) {
+                on = "walk";
                 return "playerRight";
+              
             }
-            else if (player._pressingLeft) {
+            else if (playerPos._pressingLeft) {
+                on = "walk";
                 return  "playerLeft";
             }
-            else if (player._pressingUp) {
+            else if (playerPos._pressingUp) {
+                on = "walk";
                 return "playerUp";
             }
-            else {
+            else if(playerPos._pressingDown) {
+                on = "walk";
                 return "playerDown";
+            }
+            else{
+                on='';
+                return "playerDown";
+
             }
 
         }
         Client.socket.on('newPositions', function (data) {
             game.world.removeAll();
-            var score = 0;
-            var scoreText;
+            
             game.background = game.add.sprite(0, 0, 'background');
+
+            var scoreText = game.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
             for (var i = 0; i < data.bombs.length; i++) {
                 var bombPos = data.bombs[i];
-                var bomb = game.add.sprite(bombPos._x, bombPos._y, 'bomb');
-
-                bomb.scale.setTo(0.5, 0.5);
+                var bomb = game.add.sprite(bombPos._x, bombPos._y, 'potions');
+                bomb.animations.add('bomb', [data.currentFrame % bomb.animations._frameData._frames.length]);
+                bomb.animations.play('bomb', 1, false);
+                // bomb.scale.setTo(0.5, 0.5);
             }
             for (var i = 0; i < data.players.length; i++) {
-                var player = data.players[i];
+                var playerPos = data.players[i];
 
                 //select image orientaion based on arrow selection
-                var playerImage = selectPlayerImage(player);
-                game.add.text(player._x,player._y,"username",{
-                    fontSize: '12px'
+                var playerImage = selectPlayerImage(playerPos);
+                game.add.text(playerPos._x,playerPos._y,playerPos._username,{
+                    fontSize: '14px'
                 });
-                var a = game.add.sprite(player._x+8, player._y+10, playerImage);
-                a.animations.add('walk', [data.currentFrame % a.animations._frameData._frames.length]);
-                a.animations.play('walk', 1, false);
-                
+        
+                var player = game.add.sprite(playerPos._x, playerPos._y+10, playerImage);
+                player.animations.add('walk', [data.currentFrame % player.animations._frameData._frames.length]);
+                player.animations.play(on, 1, false);
+
             }
 
             for (var i = 0; i < data.explosions.length; i++) {
-                var explosion = data.explosions[i];
-                var exp = game.add.sprite(explosion._x, explosion._y, 'explosion');
-                exp.scale.setTo(0.7, 0.7);
+                var explosionPos = data.explosions[i];
+                var explosion = game.add.sprite(explosionPos._x, explosionPos._y, 'explosion1');
+                explosion.animations.add('explode', [data.currentFrame % explosion.animations._frameData._frames.length]);
+                explosion.animations.play('explode', 1, false);
             }
 
             if(data.isDead){

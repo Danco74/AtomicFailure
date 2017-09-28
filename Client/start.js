@@ -4,11 +4,11 @@ var StartState = {
     create: function(){
         game.add.plugin(PhaserInput.Plugin);
         game.stage.backgroundColor = '#000';
-        // var stage = game.add.image(0,0,'space');
-        
-        // var gameTitle = game.add.text(100,100,"Atomic Failure");
-        // gameTitle.font = '50px Arial';
-        // gameTitle.fill = '#FF0000'
+       var x=0;
+        //display high scores from database
+        game.add.text(100,100,"HighScore 1:"+x+" \nHighScore 2: \nHighScore 3: \nHighScore 4: \nHighScore 5: ",{
+            fill:'#FF0000'
+        })
 
         var pressEnter = game.add.text(300,400,"Press Enter To Start");
         pressEnter.font = '100px monospace';
