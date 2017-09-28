@@ -76,6 +76,8 @@ class Game {
         if (tileObject.hasOwnProperty('explosion')) {
             player.isDead = true;
             var killerIndex = _findIndexById(this._players, tileObject.explosion);
+            if (killerIndex < 0 )
+                return true;
             this._players[killerIndex].score++;
             return true;
         }
