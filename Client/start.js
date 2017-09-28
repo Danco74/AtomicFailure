@@ -1,5 +1,5 @@
+
 var StartState = {
-   
     //the create function is everything that happens on the start screen
     create: function(){
         game.add.plugin(PhaserInput.Plugin);
@@ -14,7 +14,7 @@ var StartState = {
         pressEnter.font = '100px monospace';
         pressEnter.fill = '#fff'
 
-        var username = game.add.inputField(250, 300, {
+        game.username = game.add.inputField(250, 300, {
             font: '18px Arial',
             fill: '#212121',
             fontWeight: 'bold',
@@ -34,6 +34,12 @@ var StartState = {
     },
     //the start function starts the next game state - which is game play
     start: function(){
+        //grab username value
+        console.log(game.username.value);
+        //send username value to server
+        Client.socket.emit('username', {
+            username: game.username.value,
+        });
         game.state.start('GameState');
     }
 
