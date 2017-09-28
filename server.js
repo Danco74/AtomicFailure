@@ -17,7 +17,7 @@ var dbHelper = new DBHelper("localhost","AtomicFailure");
 var Game = require('./Classes/Game');
 var game = new Game();
 
-
+game._grid.setImpassableRow(0, Math.random());
 
 app.use('/', express.static(__dirname + '/client'));
 app.use('/', express.static(__dirname + '/node_modules'));
@@ -105,7 +105,7 @@ setInterval(function () {
     pack["explosions"] = game.explosions;
     pack["currentFrame"] = currentFrame;
     pack["isDead"] = false;
-
+    pack["blocks"] = game._blocks;
 
 
     //Update all clients states
@@ -122,9 +122,11 @@ setInterval(function () {
             }
         }
         var index = game._players.findIndex(function (currentObj) {
-            return currentObj.id === i;
+            return currentObj.id === parseFloat(i);
         });
-        // pack["score"] = game._players[index].score;
+        if(index >= 0) {
+            pack["score"] = game._players[index]._score;
+        }
         socket.emit('newPositions', pack);
         pack["isDead"] = false;
     }

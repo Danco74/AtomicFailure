@@ -22,25 +22,26 @@ class Game {
     get bombs() {
         return this._bombs;
     }
-
     get explosions() {
         return this._explosions;
+    }
+    get blocks() {
+        return this._blocks;
     }
 
     // Other Methods //
 
-    createBlock(id, row, col) {
-
-    }
-
-    createBlocks() {
-
+    createBlocks(arrayOfPos) {
+        for(var i = 0; i < arrayOfPos; i++) {
+            var newBlock = new Block(arrayOfPos[i].id, arrayOfPos[i].row, arrayOfPos[i].col);
+            this._blocks.push(newBlock);
+            this._grid.addToTile(newBlock.row, newBlock.col, 'block', id);
+        }
     }
 
     createPlayer(id) {
-        var xPos = 0; // Math.random???
-        var yPos = 0;
-        var newPlayer = new Player(id, xPos, yPos);
+        var random = this._grid.randomGridPlacement();
+        var newPlayer = new Player(id, random.row, random.col);
         this._players.push(newPlayer);
         // return newPlayer? or return index inside this._players?
     }
