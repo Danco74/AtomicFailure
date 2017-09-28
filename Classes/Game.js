@@ -104,7 +104,7 @@ class Game {
         this._explosions.push(explosion);
 
         for (var i = 1; i <= radius; i++) {
-            if (row + i <= gridDimensions.row) {
+            if (row + i < gridDimensions.row) {
                 var explosion = new Explosion(playerId, row + i, col, Math.random());
                 this._grid.addToTile(row + i, col, 'explosion', playerId);
                 this._explosions.push(explosion);
@@ -114,7 +114,7 @@ class Game {
                 this._grid.addToTile(row - i, col, 'explosion', playerId);
                 this._explosions.push(explosion);
             }
-            if (col + i <= gridDimensions.col) {
+            if (col + i < gridDimensions.col) {
                 var explosion = new Explosion(playerId, row, col + i, Math.random());
                 this._grid.addToTile(row, col + i, 'explosion', playerId);
                 this._explosions.push(explosion);

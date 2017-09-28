@@ -3,6 +3,15 @@ var express = require('express');
 var app = express();
 var serv = require('http').Server(app);
 
+
+//Db modules
+var DBHelper = require('./Helpers/DBHelper');
+var dbHelper = new DBHelper("localhost","AtomicFailure");
+
+
+
+
+
 //Game module
 
 var Game = require('./Classes/Game');
@@ -33,14 +42,20 @@ io.sockets.on('connection', function (socket) {
     //create new player
     game.createPlayer(socket.id); 
 
-    //when this session disconnect do the following:
     
+    //upon user submission, update the player name
+    socket.on('username',function (data){
+        game.updatePlayerName(data.username,socket.id);
+    });
+    
+    //when this session disconnect do the following:
     socket.on('disconnect',function(){
         //delete socket
         delete SOCKET_LIST[socket.id];
         //delete player
         game.deletePlayer(socket.id);
     });
+
     
     //When a key press message is being sent from the client, do the folloing:
     socket.on('keyPress', function (data) {
@@ -53,9 +68,10 @@ io.sockets.on('connection', function (socket) {
 var currentFrame = 0;
 setInterval(function () {
 
-        var pack = {};
-
     var pack = {};
+
+    dbHelper.updateScores();
+    var test = dbHelper.getScores();
 
     game.updateBombTimers();
     game.updateExplosionTimers();
