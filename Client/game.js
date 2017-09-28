@@ -94,7 +94,12 @@ var GameState = {
             
             game.background = game.add.sprite(0, 0, 'background');
 
-            var scoreText = game.add.text(16, 16, 'Score: ' + data.score, { fontSize: '32px', fill: '#000' });
+            game.add.text(675,0,"HighScore 1: "+data.scores[0]+" \nHighScore 2: "+data.scores[1]+" \nHighScore 3: "+data.scores[2]+"\nHighScore 4: "+data.scores[3]+"\nHighScore 5: "+data.scores[4],{
+                    fill:'#000000',
+                    fontSize:'12px'
+                })
+
+            var scoreText = game.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
             for (var i = 0; i < data.bombs.length; i++) {
                 var bombPos = data.bombs[i];
                 var bomb = game.add.sprite(bombPos._x, bombPos._y, 'potions');
@@ -127,7 +132,10 @@ var GameState = {
             if(data.isDead){
                 game.add.text(game.world.centerX,game.world.centerY,"you are dead")
             }
-
+            for (var i=0;i<data.blocks.length;i++){
+                var block = data.blocks[i];
+                block.add.sprite(block._x,block._y,'sink');
+            }
         });
 
         // this.player = game.add.sprite(40, 100, 'demo1');
