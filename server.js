@@ -113,6 +113,10 @@ setInterval(function () {
         if(isDeadIndex >= 0) {
             pack["isDead"] = true;
         }
+        var index = game._players.findIndex(function (currentObj) {
+            return currentObj.id === i;
+        });
+        pack["score"] = game._players[index]._score;
         socket.emit('newPositions', pack);
         pack["isDead"] = false;
     }
