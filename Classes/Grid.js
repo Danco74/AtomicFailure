@@ -27,8 +27,18 @@ class Grid {
         return {row:ROW_NUMBER,col:COL_NUMBER};
     }
 
-    setImpassableRow(){
-        
+    setImpassableRow(row, id){
+        for(var i = 0; i < this._matrix[row].length; i++) {
+            this._matrix[row][i]["block"] = id;
+        }
+    }
+
+    randomGridPlacement(){
+        var random = _randomGridSelection();
+        while(this._matrix[random.row][random.col].hasOwnProperty('block')) {
+            random = _randomGridSelection();
+        }
+        return random;
     }
 }
 
@@ -47,4 +57,11 @@ function _matrixArray(rows, cols) {
     }
 
     return matrix;
+}
+
+function _randomGridSelection() {
+    var random = {};
+    random.row = Math.floor(Math.random()*ROW_NUMBER);
+    random.col = Math.floor(Math.random()*COL_NUMBER);
+    return random;
 }

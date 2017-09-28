@@ -1,5 +1,7 @@
 var GameState = {
     preload: function () {
+
+        
         Client.socket.on('newPositions', function (data) {
             console.log("I've recieved a message");
         });
@@ -64,6 +66,9 @@ var GameState = {
     },
     create: function () {
         var on;
+
+        var expEffect = game.add.audio('explosionEffect') ;
+
         function selectPlayerImage(playerPos) {
             if (playerPos._pressingRight) {
                 on = "walk";
@@ -127,6 +132,7 @@ var GameState = {
                 var explosion = game.add.sprite(explosionPos._x, explosionPos._y, 'explosion1');
                 explosion.animations.add('explode', [data.currentFrame % explosion.animations._frameData._frames.length]);
                 explosion.animations.play('explode', 1, false);
+                expEffect.play();
             }
 
             if(data.isDead){
