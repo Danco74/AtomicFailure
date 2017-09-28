@@ -63,24 +63,25 @@ var GameState = {
 
     },
     create: function () {
-
         function selectPlayerImage(player) {
             if (player._pressingRight) {
-                playerImage = "playerRight";
+                return "playerRight";
             }
             else if (player._pressingLeft) {
-                playerImage = "playerLeft";
+                return  "playerLeft";
             }
             else if (player._pressingUp) {
-                playerImage = "playerUp";
+                return "playerUp";
             }
             else {
-                playerImage = "playerDown";
+                return "playerDown";
             }
 
         }
         Client.socket.on('newPositions', function (data) {
             game.world.removeAll();
+            var score = 0;
+            var scoreText;
             game.background = game.add.sprite(0, 0, 'background');
             for (var i = 0; i < data.bombs.length; i++) {
                 var bombPos = data.bombs[i];
@@ -93,8 +94,10 @@ var GameState = {
 
                 //select image orientaion based on arrow selection
                 var playerImage = selectPlayerImage(player);
-
-                var a = game.add.sprite(player._x, player._y, 'playerUp');
+                game.add.text(player._x,player._y,"username",{
+                    fontSize: '12px'
+                });
+                var a = game.add.sprite(player._x+8, player._y+10, playerImage);
                 a.animations.add('walk', [data.currentFrame % a.animations._frameData._frames.length]);
                 a.animations.play('walk', 1, false);
 
