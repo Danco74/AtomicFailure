@@ -14,8 +14,10 @@ var PreloadState = {
         this.load.spritesheet('playerLeft','assets/left.png',40,55,4);
         this.load.spritesheet('playerRight','assets/right.png',40,55,4);
         this.load.spritesheet('potions','assets/potions.png',29,37,4);
-        this.load.spritesheet('potionshome','assets/potionshome.png',29,37,4);
-        this.load.spritesheet('explosion1','assets/explosion1.png',45,45,16);
+        this.load.spritesheet('logo','assets/potionshome.png',87,111,4);
+        this.load.spritesheet('explosion1','assets/explosion1.png',48,45,14);
+        this.load.audio('music', 'assets/music.mp3');
+        this.load.audio('explosionEffect', 'assets/explosion.mp3');
 
     },
 

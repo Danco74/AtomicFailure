@@ -18,6 +18,17 @@ var Game = require('./Classes/Game');
 var game = new Game();
 
 game._grid.setImpassableRow(0, Math.random());
+var DEFAULT_BLOCKS = [{id: Math.random(), row: 4, col: 2},
+                      {id: Math.random(), row: 4, col: 5},
+                      {id: Math.random(), row: 4, col: 8},
+                      {id: Math.random(), row: 7, col: 2},
+                      {id: Math.random(), row: 7, col: 5},
+                      {id: Math.random(), row: 7, col: 8},
+                      {id: Math.random(), row: 10, col: 2},
+                      {id: Math.random(), row: 10, col: 5},
+                      {id: Math.random(), row: 10, col: 8}
+                    ];
+game.createBlocks(DEFAULT_BLOCKS);
 
 app.use('/', express.static(__dirname + '/client'));
 app.use('/', express.static(__dirname + '/node_modules'));

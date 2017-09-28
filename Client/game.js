@@ -1,5 +1,7 @@
 var GameState = {
     preload: function () {
+
+        
         Client.socket.on('newPositions', function (data) {
             console.log("I've recieved a message");
         });
@@ -64,6 +66,9 @@ var GameState = {
     },
     create: function () {
         var on;
+
+        var expEffect = game.add.audio('explosionEffect') ;
+
         function selectPlayerImage(playerPos) {
             if (playerPos._pressingRight) {
                 on = "walk";
@@ -94,10 +99,15 @@ var GameState = {
             
             game.background = game.add.sprite(0, 0, 'background');
 
-            game.add.text(675,0,"HighScore 1: "+data.scores[0]+" \nHighScore 2: "+data.scores[1]+" \nHighScore 3: "+data.scores[2]+"\nHighScore 4: "+data.scores[3]+"\nHighScore 5: "+data.scores[4],{
+            var x_count = 675;
+            var y_count = 0;
+            for (var i=0; i< data.scores.length;i++){
+            game.add.text(675,y_count,data.scores[i].name+": "+data.scores[i].score,{
                     fill:'#000000',
                     fontSize:'12px'
-                })
+                });
+                y_count+=15;
+            }
 
             var scoreText = game.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
             for (var i = 0; i < data.bombs.length; i++) {
@@ -127,15 +137,16 @@ var GameState = {
                 var explosion = game.add.sprite(explosionPos._x, explosionPos._y, 'explosion1');
                 explosion.animations.add('explode', [data.currentFrame % explosion.animations._frameData._frames.length]);
                 explosion.animations.play('explode', 1, false);
+                expEffect.play();
             }
 
             if(data.isDead){
-                game.add.text(game.world.centerX,game.world.centerY,"you are dead")
+                game.add.text(game.world.centerX,game.world.centerY,"you are dead");
             }
-            for (var i=0;i<data.blocks.length;i++){
-                var block = data.blocks[i];
-                block.add.sprite(block._x,block._y,'sink');
-            }
+            // for (var i=0;i<data.blocks.length;i++){
+            //     var block = data.blocks[i];
+            //     block.add.sprite(block._x,block._y,'sink');
+            // }
         });
 
         // this.player = game.add.sprite(40, 100, 'demo1');
