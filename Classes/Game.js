@@ -22,19 +22,21 @@ class Game {
     get bombs() {
         return this._bombs;
     }
-
     get explosions() {
         return this._explosions;
+    }
+    get blocks() {
+        return this._blocks;
     }
 
     // Other Methods //
 
-    createBlock(id, row, col) {
-
-    }
-
-    createBlocks() {
-
+    createBlocks(arrayOfPos) {
+        for(var i = 0; i < arrayOfPos; i++) {
+            var newBlock = new Block(id, row, col);
+            this._blocks.push(newBlock);
+            this._grid.addToTile(newBlock.row, newBlock.col, 'block', id);
+        }
     }
 
     createPlayer(id) {
