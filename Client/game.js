@@ -130,12 +130,12 @@ var GameState = {
             }
 
             if(data.isDead){
-                game.add.text(game.world.centerX,game.world.centerY,"you are dead")
+                game.add.text(game.world.centerX,game.world.centerY,"you are dead");
             }
-            for (var i=0;i<data.blocks.length;i++){
-                var block = data.blocks[i];
-                block.add.sprite(block._x,block._y,'sink');
-            }
+            // for (var i=0;i<data.blocks.length;i++){
+            //     var block = data.blocks[i];
+            //     block.add.sprite(block._x,block._y,'sink');
+            // }
         });
 
         // this.player = game.add.sprite(40, 100, 'demo1');

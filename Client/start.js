@@ -7,8 +7,8 @@ var StartState = {
         //display high scores from database
 
         var potionLogo = game.add.sprite(300,300,'potionshome');
-        potionLogo.animations.add('logo');
-        potionLogo.animations.play('logo', 1, false);
+        // potionLogo.animations.add('logo');
+        // potionLogo.animations.play('logo', 1, false);
 
         var pressEnter = game.add.text(300,400,"Press Enter To Start");
         pressEnter.font = '100px monospace';
