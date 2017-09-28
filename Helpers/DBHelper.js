@@ -14,7 +14,6 @@ class MongoHelper {
 
     //Add score to database
     addScore(playerId,playerName,score){
-        console.log("stam");
         var newScore = new this._Score({
             name: playerName,
             score: score
@@ -26,7 +25,7 @@ class MongoHelper {
     }
 
     updateScores(){
-        var query = this._Score.find();
+        var query = this._Score.find().sort({score: -1}).limit(5);
         var self = this;
         query.exec(function (err,scores){
             self._scores = scores;
