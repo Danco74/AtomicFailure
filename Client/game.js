@@ -94,7 +94,7 @@ var GameState = {
 
                 //select image orientaion based on arrow selection
                 var playerImage = selectPlayerImage(player);
-                game.add.text(player._x,player._y,"username",{
+                game.add.text(player._x,player._y, player._username,{
                     fontSize: '12px'
                 });
                 var a = game.add.sprite(player._x+8, player._y+10, playerImage);
