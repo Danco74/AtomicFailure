@@ -107,7 +107,6 @@ setInterval(function () {
     pack["isDead"] = false;
 
 
-
     //Update all clients states
     for (var i in SOCKET_LIST) {
         var socket = SOCKET_LIST[i];
@@ -122,9 +121,11 @@ setInterval(function () {
             }
         }
         var index = game._players.findIndex(function (currentObj) {
-            return currentObj.id === i;
+            return currentObj.id === parseFloat(i);
         });
-        pack["score"] = game._players[index]._score;
+        if(index >= 0) {
+            pack["score"] = game._players[index]._score;
+        }
         socket.emit('newPositions', pack);
         pack["isDead"] = false;
     }

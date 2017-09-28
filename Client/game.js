@@ -94,7 +94,7 @@ var GameState = {
             
             game.background = game.add.sprite(0, 0, 'background');
 
-            var scoreText = game.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
+            var scoreText = game.add.text(16, 16, 'Score: ' + data.score, { fontSize: '32px', fill: '#000' });
             for (var i = 0; i < data.bombs.length; i++) {
                 var bombPos = data.bombs[i];
                 var bomb = game.add.sprite(bombPos._x, bombPos._y, 'potions');
