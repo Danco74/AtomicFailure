@@ -27,8 +27,10 @@ class Grid {
         return {row:ROW_NUMBER,col:COL_NUMBER};
     }
 
-    setImpassableRow(){
-        
+    setImpassableRow(row, id){
+        for(var i = 0; i < this._matrix[row].length; i++) {
+            this._matrix[row][i]["block"] = id;
+        }
     }
 }
 
