@@ -32,6 +32,14 @@ class Grid {
             this._matrix[row][i]["block"] = id;
         }
     }
+
+    randomGridPlacement(){
+        var random = _randomGridSelection();
+        while(this._matrix[random.row][random.col].hasOwnProperty('block')) {
+            random = _randomGridSelection();
+        }
+        return random;
+    }
 }
 
 // Export //
@@ -49,4 +57,11 @@ function _matrixArray(rows, cols) {
     }
 
     return matrix;
+}
+
+function _randomGridSelection() {
+    var random = {};
+    random.row = Math.floor(Math.random()*ROW_NUMBER);
+    random.col = Math.floor(Math.random()*COL_NUMBER);
+    return random;
 }

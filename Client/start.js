@@ -4,7 +4,6 @@ var StartState = {
     create: function(){
         game.add.plugin(PhaserInput.Plugin);
         game.stage.backgroundColor = '#000';
-       var x=0;
         //display high scores from database
         game.add.text(100,100,"HighScore 1:"+x+" \nHighScore 2: \nHighScore 3: \nHighScore 4: \nHighScore 5: ",{
             fill:'#FF0000'
@@ -12,7 +11,11 @@ var StartState = {
         
         music = game.add.audio('music');
         music.play();
-        
+
+
+        var potionLogo = game.add.sprite(300,300,'potionshome');
+        potionLogo.animations.add('logo');
+        potionLogo.animations.play('logo', 1, false);
 
         var pressEnter = game.add.text(300,400,"Press Enter To Start");
         pressEnter.font = '100px monospace';
@@ -38,8 +41,6 @@ var StartState = {
     },
     //the start function starts the next game state - which is game play
     start: function(){
-        //grab username value
-        console.log(game.username.value);
         //send username value to server
         Client.socket.emit('username', {
             username: game.username.value,
