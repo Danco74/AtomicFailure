@@ -1,4 +1,4 @@
-var TIMER = 16;
+var TIMER = 10;
 
 // Imports //
 var Entity = require('./Entity');
