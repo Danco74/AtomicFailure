@@ -6,9 +6,9 @@ var StartState = {
         game.stage.backgroundColor = '#000';
         //display high scores from database
 
-        var potionLogo = game.add.sprite(300,300,'potionshome');
-        // potionLogo.animations.add('logo');
-        // potionLogo.animations.play('logo', 1, false);
+        var potionLogo = game.add.sprite(350,100,'logo');
+        potionLogo.animations.add('logo');
+        potionLogo.animations.play('logo', 1, true);
 
         var pressEnter = game.add.text(300,400,"Press Enter To Start");
         pressEnter.font = '100px monospace';

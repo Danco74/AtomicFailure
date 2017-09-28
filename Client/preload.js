@@ -14,7 +14,7 @@ var PreloadState = {
         this.load.spritesheet('playerLeft','assets/left.png',40,55,4);
         this.load.spritesheet('playerRight','assets/right.png',40,55,4);
         this.load.spritesheet('potions','assets/potions.png',29,37,4);
-        this.load.spritesheet('potionshome','assets/potionshome.png',29,37,4);
+        this.load.spritesheet('logo','assets/potionshome.png',87,111,4);
         this.load.spritesheet('explosion1','assets/explosion1.png',48,45,14);
 
     },
