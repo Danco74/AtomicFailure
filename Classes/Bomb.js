@@ -1,5 +1,5 @@
 // Global Variables //
-var EXPLOSION_RADIUS = 2;
+var EXPLOSION_RADIUS = 1;
 var TIMER = 33;
 
 // Imports //

@@ -76,7 +76,8 @@ setInterval(function () {
     var pack = {};
 
     dbHelper.updateScores();
-    var test = dbHelper.getScores();
+    var scores = dbHelper.getScores();
+    pack.scores = scores;
 
     game.updateBombTimers();
     game.updateExplosionTimers();

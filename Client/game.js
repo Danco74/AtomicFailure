@@ -106,7 +106,7 @@ var GameState = {
             for (var i = 0; i < data.explosions.length; i++) {
                 var explosion = data.explosions[i];
                 var exp = game.add.sprite(explosion._x, explosion._y, 'explosion');
-                exp.scale.setTo(0.5, 0.5);
+                exp.scale.setTo(0.7, 0.7);
             }
 
             if(data.isDead){

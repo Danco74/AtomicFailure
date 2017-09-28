@@ -7,8 +7,8 @@ class Entity {
         this._id = id;
         this._row = row;
         this._col = col;
-        this._x = row * GRID_PIXEL_CONVERSION;
-        this._y = col * GRID_PIXEL_CONVERSION;
+        this._x = col * GRID_PIXEL_CONVERSION;
+        this._y = row * GRID_PIXEL_CONVERSION;
     }
 
     // Getters //
