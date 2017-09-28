@@ -5,6 +5,13 @@ var StartState = {
         game.add.plugin(PhaserInput.Plugin);
         game.stage.backgroundColor = '#000';
         //display high scores from database
+        game.add.text(100,100,"HighScore 1:"+x+" \nHighScore 2: \nHighScore 3: \nHighScore 4: \nHighScore 5: ",{
+            fill:'#FF0000'
+        })
+        
+        music = game.add.audio('music');
+        music.play();
+
 
         var potionLogo = game.add.sprite(300,300,'potionshome');
         potionLogo.animations.add('logo');
