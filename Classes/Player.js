@@ -18,6 +18,7 @@ class Player extends Entity {
         this._pressingBomb = false;
         this._maxSpd = MAX_SPEED;
         this._score = 0;
+        this._username = id;
     }
 
     // Getters //
@@ -48,6 +49,9 @@ class Player extends Entity {
     get score() {
         return this._score;
     }
+    get username() {
+        return this._username;
+    }
 
     // Setters //
     set bombCount(newCount) {
@@ -58,6 +62,9 @@ class Player extends Entity {
     }
     set score(newscore) {
         this._score = newscore;
+    }
+    set username(newUsername) {
+        this._username = newUsername;
     }
 
     // Other Methods //
