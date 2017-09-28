@@ -124,7 +124,7 @@ setInterval(function () {
         var index = game._players.findIndex(function (currentObj) {
             return currentObj.id === i;
         });
-        pack["score"] = game._players[index]._score;
+        // pack["score"] = game._players[index].score;
         socket.emit('newPositions', pack);
         pack["isDead"] = false;
     }
