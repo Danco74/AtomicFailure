@@ -9,9 +9,6 @@ var DBHelper = require('./Helpers/DBHelper');
 var dbHelper = new DBHelper("localhost","AtomicFailure");
 
 
-
-
-
 //Game module
 
 var Game = require('./Classes/Game');
@@ -35,7 +32,8 @@ app.use('/', express.static(__dirname + '/node_modules'));
 
 
 //Server startup
-serv.listen(2000);
+// serv.listen(2000);
+serv.listen(process.env.PORT || '2000');
 console.log("Server started.");
 
 
