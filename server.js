@@ -34,8 +34,10 @@ app.use('/', express.static('node_modules'));
 
 //Server startup
 // serv.listen(2000);
-serv.listen(process.env.PORT || '2000');
-console.log("Server started.");
+serv.listen( process.env.PORT || '2000',function(){
+    
+console.log("Server started."+ process.env.PORT);
+});
 
 
 //Decllaring socket list
