@@ -3,6 +3,8 @@ var express = require('express');
 var app = express();
 var serv = require('http').createServer(app);
 var io = require('socket.io').listen(serv);
+var socket = io('ws://atomic-failure.herokuapp.com'+process.env.PORT); 
+
 
 
 //Db modules
