@@ -1,7 +1,8 @@
 //Server modules
 var express = require('express');
 var app = express();
-var serv = require('http').Server(app);
+var serv = require('http').createServer(app);
+var io = require('socket.io').listen(serv);
 
 
 //Db modules
@@ -39,7 +40,6 @@ console.log("Server started.");
 
 //Decllaring socket list
 var SOCKET_LIST = {};
-var io = require('socket.io')(serv, {});
 var DEAD_PLAYERS = [];
 
 //On connection - when a client setup a connection with the server,
