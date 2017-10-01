@@ -15,8 +15,7 @@
     "mongoose": "^4.11.13",
     "phaser": "^2.6.2",
     "@orange-games/phaser-input": "^2.0.5",
-    "socket.io": "^2.0.3",
-    "phaser-input": "^1.2.6"
+    "socket.io": "^2.0.3"
   },
   "devDependencies": {
   }
