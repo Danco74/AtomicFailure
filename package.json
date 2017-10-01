@@ -14,10 +14,10 @@
     "jquery": "^3.2.1",
     "mongoose": "^4.11.13",
     "phaser": "^2.6.2",
-    "socket.io": "^2.0.3"
+    "@orange-games/phaser-input": "^2.0.5",
+    "socket.io": "^2.0.3",
+    "phaser-input": "^1.2.6"
   },
   "devDependencies": {
-    "@orange-games/phaser-input": "^2.0.5",
-    "phaser-input": "^1.2.6"
   }
 }
