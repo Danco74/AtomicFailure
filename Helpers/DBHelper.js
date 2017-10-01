@@ -1,9 +1,9 @@
 // Class //
 class MongoHelper {
     //Constructor
-    constructor(host,db) {
+    constructor(host,db,deployingServer) {
         this._mongoose = require('mongoose');
-        this._mongoose.connect(process.env.MONGOLAB_URI||'mongodb://' + host + '/' + db, function (error) {
+        this._mongoose.connect(deployingServer ||'mongodb://' + host + '/' + db, function (error) {
             if (error) throw "DB connection failed";
             console.log("DB connection established!!!");
           })

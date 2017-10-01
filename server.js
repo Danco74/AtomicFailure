@@ -6,7 +6,7 @@ var serv = require('http').Server(app);
 
 //Db modules
 var DBHelper = require('./Helpers/DBHelper');
-var dbHelper = new DBHelper("localhost","AtomicFailure");
+var dbHelper = new DBHelper("localhost","AtomicFailure", process.env.MONGOLAB_URI);
 
 
 //Game module
