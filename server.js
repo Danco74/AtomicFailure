@@ -29,7 +29,7 @@ var DEFAULT_BLOCKS = [
                       {id: Math.random(), row: 10, col: 8}
                     ];
 
-app.use('/', express.static('client'));
+app.use('/', express.static('Client'));
 app.use('/', express.static('node_modules'));
 
 
